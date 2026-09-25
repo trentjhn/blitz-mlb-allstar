@@ -5,6 +5,7 @@ import requests
 
 from allstar import config
 from allstar.cache import load_manifest
+from allstar.parse_player import read_player
 from allstar.parse_team import all_star_rows, read_team
 from tests.fakes import FakeClock
 
@@ -35,3 +36,11 @@ def cached_teams():
             page = (config.RAW_DIR / entry["path"]).read_bytes()
             parsed.append((url, read_team(page, code, season), all_star_rows(page, season)))
     return parsed
+
+
+@pytest.fixture(scope="session")
+def cached_players():
+    """Every cached player page, parsed once: player id -> Player."""
+    folder = config.RAW_DIR / "players"
+    pages = sorted(folder.glob("*.shtml"))
+    return {path.stem: read_player(path.read_bytes(), path.stem) for path in pages}

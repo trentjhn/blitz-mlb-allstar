@@ -20,6 +20,7 @@ TEAMS_PER_SEASON = 30
 
 BR_BASE = "https://www.baseball-reference.com"
 SHOW_URL = "https://www.theshowratings.com/lists/top-100-players"
+SHOW_LIST_SIZE = 100
 
 USER_AGENT = "blitz-mlb-allstar/1.0 (MLB All-Star take-home; cached scraper, one request every 4 s)"
 
