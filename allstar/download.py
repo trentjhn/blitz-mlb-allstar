@@ -24,15 +24,37 @@ class Refused(Exception):
         status: int | None = None,
         headers: dict | None = None,
         body: bytes = b"",
-        blocked: bool = False,
     ) -> None:
         super().__init__(reason)
         self.reason = reason
         self.status = status
         self.headers = headers or {}
         self.body = body
-        # A refusal (403 or 429) means the site is blocking us, not that one page is bad.
-        self.blocked = blocked
+
+
+def refusal(pacer: RequestPacer, url: str, response: requests.Response) -> Refused:
+    """The Refused for a status that stops the run.
+
+    A 403 or 429 means the site is blocking us, not that one page is bad. It is recorded with
+    the pacer before the body is read, so the block holds even if the run dies while that body
+    arrives.
+    """
+    status = response.status_code
+    reason, notes = f"HTTP {status}", []
+    if status in (403, 429):
+        reason += ", the site is refusing or rate limiting us (no retry)"
+        try:
+            pacer.block(f"{url}: {reason}")
+        except OSError as exc:
+            notes.append(
+                f"the block file could not be written ({exc}); "
+                "wait for the block to lift before running again"
+            )
+    try:
+        body = response.content
+    except requests.RequestException:
+        body, reason = b"", reason + ", body unreadable"
+    return Refused("; ".join([reason, *notes]), status, dict(response.headers), body)
 
 
 def download(
@@ -41,11 +63,7 @@ def download(
     sleep: Callable[[float], None],
     url: str,
 ) -> tuple[dict, bytes]:
-    """GET a page and return (headers, body) for a 200. Anything else raises Refused.
-
-    Only Fetcher.get calls this: it is what turns a blocked Refused into the block file that
-    stops every later run.
-    """
+    """GET a page and return (headers, body) for a 200. Anything else raises Refused."""
     failures: list[str] = []
     last: tuple = (None, {}, b"")
     for wait in (*config.RETRY_WAITS_S, None):
@@ -63,15 +81,7 @@ def download(
             # The status decides before the body is read, so a refusal whose body fails to
             # arrive can never turn into a retry. Only 200 and 5xx go further.
             if status != 200 and not 500 <= status < 600:
-                blocked = status in (403, 429)
-                reason = f"HTTP {status}"
-                if blocked:
-                    reason += ", the site is refusing or rate limiting us (no retry)"
-                try:
-                    body = response.content
-                except requests.RequestException:
-                    body, reason = b"", reason + ", body unreadable"
-                raise Refused(reason, status, headers, body, blocked)
+                raise refusal(pacer, url, response)
             try:
                 body = response.content
             except RETRYABLE_ERRORS as exc:

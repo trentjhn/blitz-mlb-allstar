@@ -146,6 +146,8 @@ def test_any_other_non_200_below_500_stops(tmp_path, clock, status):
     with fetcher, pytest.raises(StopScrape, match=f"HTTP {status}"):
         fetcher.get(TEAM_URL)
     assert len(session.calls) == 1
+    # One bad page is not a block: later runs may still send.
+    assert not (tmp_path / ".scrape.blocked").exists()
     assert quarantined(tmp_path)[1]["headers"] == headers
 
 
@@ -339,14 +341,15 @@ def test_spacing_and_timeout_meet_the_project_floor():
     assert config.TIMEOUT_S > 0
 
 
-def test_a_refusal_blocks_later_requests_until_the_block_file_is_deleted(tmp_path, clock):
+@pytest.mark.parametrize("status", [429, 403])
+def test_a_refusal_blocks_later_requests_until_the_block_file_is_deleted(tmp_path, clock, status):
     cached, _ = make_fetcher(tmp_path, clock, FakeResponse(200, TEAM_PAGE))
     with cached:
         cached.get(TEAM_URL)
-    first, _ = make_fetcher(tmp_path, clock, FakeResponse(429))
+    first, _ = make_fetcher(tmp_path, clock, FakeResponse(status))
     with first, pytest.raises(StopScrape):
         first.get(OTHER_TEAM_URL)
-    assert "HTTP 429" in (tmp_path / ".scrape.blocked").read_text()
+    assert f"HTTP {status}" in (tmp_path / ".scrape.blocked").read_text()
 
     later, session = make_fetcher(tmp_path, clock, FakeResponse(200, team_page(url=OTHER_TEAM_URL)))
     with later:
@@ -374,6 +377,81 @@ def test_a_block_file_that_cannot_be_written_still_stops_cleanly(tmp_path, clock
     assert quarantined(tmp_path)[1]["status"] == 429
 
 
+def test_a_run_killed_while_a_refusal_arrives_still_blocks_the_next_run(tmp_path, clock):
+    fetcher, _ = make_fetcher(tmp_path, clock, FakeResponse(429, read_error=KeyboardInterrupt()))
+    with fetcher, pytest.raises(KeyboardInterrupt):
+        fetcher.get(TEAM_URL)
+    assert "HTTP 429" in (tmp_path / ".scrape.blocked").read_text()
+
+    later, session = make_fetcher(tmp_path, clock)
+    with later, pytest.raises(StopScrape, match="refused an earlier request"):
+        later.get(OTHER_TEAM_URL)
+    assert session.calls == []
+
+
+def empty_file(path):
+    path.write_bytes(b"")
+
+
+def broken_symlink(path):
+    path.symlink_to(path.parent / "missing.txt")
+
+
+def live_symlink(path):
+    (path.parent / "notes.txt").write_text("HTTP 429 from somewhere else")
+    path.symlink_to(path.parent / "notes.txt")
+
+
+def folder(path):
+    path.mkdir()
+
+
+def unreadable_file(path):
+    path.write_text("HTTP 429")
+    path.chmod(0)
+
+
+def named_pipe(path):
+    os.mkfifo(path)
+
+
+STRAY = "is not a readable block record"
+
+
+@pytest.mark.parametrize(
+    ("entry", "message"),
+    [
+        # What a kill inside RequestPacer.block(), or a full disk, leaves behind.
+        (empty_file, r"refused an earlier request \(no reason recorded\)"),
+        (broken_symlink, STRAY),
+        (live_symlink, STRAY),
+        (folder, STRAY),
+        pytest.param(
+            unreadable_file,
+            STRAY,
+            marks=pytest.mark.skipif(os.geteuid() == 0, reason="root can read any file"),
+        ),
+        (named_pipe, STRAY),
+    ],
+)
+def test_anything_at_the_block_path_blocks_requests(tmp_path, clock, entry, message):
+    entry(tmp_path / ".scrape.blocked")
+    fetcher, session = make_fetcher(tmp_path, clock, FakeResponse(200, TEAM_PAGE))
+    with fetcher, pytest.raises(StopScrape, match=message):
+        fetcher.get(TEAM_URL)
+    assert session.calls == []
+    assert not (tmp_path / "missing.txt").exists()
+
+
+def test_only_the_start_of_a_long_block_record_is_read(tmp_path, clock):
+    (tmp_path / ".scrape.blocked").write_text("HTTP 429 " + "x" * 3_000_000)
+    fetcher, session = make_fetcher(tmp_path, clock)
+    with fetcher, pytest.raises(StopScrape, match="refused an earlier request") as stopped:
+        fetcher.get(TEAM_URL)
+    assert len(str(stopped.value)) < 1_000
+    assert session.calls == []
+
+
 def test_a_failed_write_stops_the_run_without_a_second_request(tmp_path, clock, monkeypatch):
     fetcher, session = make_fetcher(
         tmp_path, clock, FakeResponse(200, TEAM_PAGE), FakeResponse(200, TEAM_PAGE)
@@ -384,7 +462,7 @@ def test_a_failed_write_stops_the_run_without_a_second_request(tmp_path, clock, 
 
     with fetcher:
         monkeypatch.setattr("allstar.fetch.write_atomic", full_disk)
-        with pytest.raises(OSError):
+        with pytest.raises(StopScrape, match=r"writing teams/NYY_2024\.shtml failed.*No space"):
             fetcher.get(TEAM_URL)
         with pytest.raises(StopScrape, match="already stopped"):
             fetcher.get(TEAM_URL)
@@ -470,6 +548,7 @@ def test_statuses_outside_200_and_5xx_stop_without_a_retry(tmp_path, clock, stat
     with fetcher, pytest.raises(StopScrape, match=f"HTTP {status}"):
         fetcher.get(TEAM_URL)
     assert len(session.calls) == 1
+    assert not (tmp_path / ".scrape.blocked").exists()
 
 
 def test_the_failure_message_lists_every_attempt(tmp_path, clock):

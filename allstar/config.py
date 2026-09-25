@@ -6,11 +6,13 @@ ROOT = Path(__file__).resolve().parent.parent
 RAW_DIR = ROOT / "data" / "raw"
 QUARANTINE_DIR = ROOT / "data" / "quarantine"
 LOCK_PATH = ROOT / "data" / ".scrape.lock"
-# Written when the site refuses a request (403 or 429); every later scrape refuses to start
-# until someone deletes it, because Baseball Reference blocks can last a day.
+# Written when the site refuses a request (403 or 429). Until someone deletes it, no run sends
+# another request (cached pages still load), because Baseball Reference blocks can last a day.
 BLOCK_PATH = ROOT / "data" / ".scrape.blocked"
 
 SEASONS = (2024, 2025, 2026)
+# Each season's league page must link exactly this many team pages, or the run stops.
+TEAMS_PER_SEASON = 30
 
 BR_BASE = "https://www.baseball-reference.com"
 SHOW_URL = "https://www.theshowratings.com/lists/top-100-players"

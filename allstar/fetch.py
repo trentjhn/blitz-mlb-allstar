@@ -65,7 +65,6 @@ class Fetcher:
             raise ValueError("force and offline cannot be combined")
         self.raw_dir = raw_dir
         self.quarantine_dir = quarantine_dir
-        self.block_path = block_path
         self.force = force
         self.offline = offline
         self.session = session or make_session()
@@ -106,7 +105,7 @@ class Fetcher:
             if body is not None:
                 return body
         if self.offline:
-            raise StopScrape(f"{url} is not in the cache, and offline mode sends no requests")
+            raise StopScrape(f"{url} is not in the cache, and this run sends no requests")
 
         try:
             headers, body = download(self.session, self.pacer, self.sleep, url)
@@ -123,9 +122,12 @@ class Fetcher:
             write_atomic(path, body)
             self.manifest[url] = manifest_entry(page.path, body, self.now())
             save_manifest(self.raw_dir, self.manifest)
-        except BaseException as exc:
+        except OSError as exc:
             # After a failed write nothing can trust the cache, so the run handles no more URLs.
-            self.stopped = f"writing {page.path} failed: {type(exc).__name__}"
+            self.stopped = f"writing {page.path} failed: {exc}"
+            raise StopScrape(f"{url}: {self.stopped}") from exc
+        except BaseException as exc:
+            self.stopped = f"writing {page.path} was cut short: {type(exc).__name__}"
             raise
         self._fetched_this_run.add(url)
         return body
@@ -155,15 +157,6 @@ class Fetcher:
     def _stop(self, url: str, refused: Refused) -> NoReturn:
         """Latch the stop first, then keep what the site sent, then raise."""
         self.stopped = refused.reason
-        notes = []
-        if refused.blocked:
-            try:
-                write_atomic(self.block_path, f"{self.now()} {url}: {refused.reason}\n".encode())
-            except OSError as exc:
-                notes.append(
-                    f"the block file could not be written ({exc}); "
-                    "wait for the block to lift before running again"
-                )
         try:
             kept = keep_rejected(
                 self.quarantine_dir,
@@ -174,7 +167,7 @@ class Fetcher:
                 refused.body,
                 self.now(),
             )
-            notes.insert(0, f"response kept at {kept}")
+            note = f"response kept at {kept}"
         except OSError as exc:
-            notes.insert(0, f"the response could not be kept: {exc}")
-        raise StopScrape(f"{url}: {refused.reason}; {'; '.join(notes)}")
+            note = f"the response could not be kept: {exc}"
+        raise StopScrape(f"{url}: {refused.reason}; {note}")

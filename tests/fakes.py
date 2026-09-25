@@ -1,6 +1,7 @@
 """Fake HTTP responses, session, and clock, so fetcher tests never touch the network or sleep."""
 
 from allstar.fetch import Fetcher
+from allstar.pages import page_for
 
 TEAM_URL = "https://www.baseball-reference.com/teams/NYY/2024.shtml"
 OTHER_TEAM_URL = "https://www.baseball-reference.com/teams/BOS/2024.shtml"
@@ -14,6 +15,12 @@ def team_page(url: str = TEAM_URL, filler: int = 60_000, extra: bytes = b"") -> 
 
 
 TEAM_PAGE = team_page()
+
+
+def passing_page(url: str, extra: bytes = b"") -> bytes:
+    """A page that passes the write gate for any cached URL: its checks, filler, a closing tag."""
+    page = page_for(url)
+    return b"<html>" + b" ".join(page.markers) + extra + b" " * page.min_bytes + b"</html>\n"
 
 
 class FakeResponse:
@@ -55,6 +62,20 @@ class FakeSession:
         if isinstance(reply, Exception):
             raise reply
         return reply
+
+
+class FakeSite:
+    """Serves a fixed set of pages by URL, 404 for anything else, and records each request."""
+
+    def __init__(self, pages: dict[str, bytes]):
+        self.pages = pages
+        self.calls: list[str] = []
+
+    def get(self, url, **kwargs):
+        self.calls.append(url)
+        if url in self.pages:
+            return FakeResponse(200, self.pages[url])
+        return FakeResponse(404)
 
 
 def make_fetcher(tmp_path, clock, *replies, **options):

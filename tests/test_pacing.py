@@ -66,6 +66,15 @@ def test_symlink_at_the_lock_path_is_refused_and_its_target_untouched(tmp_path):
     assert target.read_text() == "keep me"
 
 
+def test_the_block_is_never_written_through_a_symlink(tmp_path):
+    target = tmp_path / "elsewhere.txt"
+    (tmp_path / ".blocked").symlink_to(target)
+    pacer = RequestPacer(tmp_path / ".scrape.lock", block_path=tmp_path / ".blocked")
+    with pytest.raises(OSError):
+        pacer.block("HTTP 429")
+    assert not target.exists()
+
+
 def test_waiting_needs_an_open_pacer(tmp_path):
     with pytest.raises(RuntimeError, match="not open"):
         RequestPacer(tmp_path / ".scrape.lock").wait_turn()

@@ -6,6 +6,7 @@ across separate runs, not only within one.
 
 import fcntl
 import os
+import stat
 import time
 from collections.abc import Callable
 from pathlib import Path
@@ -75,11 +76,17 @@ class RequestPacer:
         if os.fstat(self._fd).st_nlink == 0:
             raise StopScrape(f"{self.lock_path} was deleted during the run; stopping")
         # Every request passes through here, so a refusal recorded by any earlier run stops
-        # this one before it sends, while work that needs only the cache still runs.
-        if self.block_path.exists():
-            reason = self.block_path.read_text(errors="replace").strip()
+        # this one before it sends, while work that needs only the cache still runs. Anything
+        # at the block path counts, even a broken symlink, so the check fails closed.
+        if os.path.lexists(self.block_path):
+            record = self._block_record()
+            if record is None:
+                raise StopScrape(
+                    f"{self.block_path} exists but is not a readable block record, so no "
+                    "request is sent. Delete it if the site has not refused a request."
+                )
             raise StopScrape(
-                f"the site refused an earlier request ({reason}). "
+                f"the site refused an earlier request ({record or 'no reason recorded'}). "
                 f"Delete {self.block_path} once the block has lifted; they can last a day."
             )
         if self._last_start is not None:
@@ -94,3 +101,29 @@ class RequestPacer:
         os.ftruncate(self._fd, 0)
         os.pwrite(self._fd, f"{self._last_start:.3f}\n".encode(), 0)
         self.starts += 1
+
+    def _block_record(self) -> str | None:
+        """The refusal recorded at the block path, or None if what is there is not a record."""
+        # No symlinks, no waiting, and a bounded read, so a stray link, pipe, or huge file can
+        # neither redirect this nor hang it.
+        try:
+            fd = os.open(self.block_path, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK)
+        except OSError:
+            return None
+        try:
+            if not stat.S_ISREG(os.fstat(fd).st_mode):
+                return None
+            return os.read(fd, 500).decode("utf-8", "replace").strip()
+        except OSError:
+            return None
+        finally:
+            os.close(fd)
+
+    def block(self, reason: str) -> None:
+        """Record a refusal. Every later request, in this run or any other, then stops."""
+        stamp = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime(self.clock()))
+        # Written in place rather than renamed in, so the block holds from the moment the file
+        # exists. O_NOFOLLOW for the same reason as the lock file.
+        flags = os.O_WRONLY | os.O_CREAT | os.O_TRUNC | os.O_NOFOLLOW
+        with os.fdopen(os.open(self.block_path, flags, 0o644), "w") as handle:
+            handle.write(f"{stamp} {reason}\n")
