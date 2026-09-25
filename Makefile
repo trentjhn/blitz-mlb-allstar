@@ -3,7 +3,7 @@ VENV := .venv
 PY := $(VENV)/bin/python
 INSTALLED := $(VENV)/.installed
 
-.PHONY: install lint test
+.PHONY: install lint test scrape build all
 
 install: $(INSTALLED)
 
@@ -23,3 +23,15 @@ lint: $(INSTALLED)
 
 test: $(INSTALLED)
 	$(PY) -m pytest -q
+
+# Fetches only the pages missing from data/raw/; with the committed cache it sends nothing.
+scrape: $(INSTALLED)
+	$(PY) scrape.py
+
+build: $(INSTALLED)
+	$(PY) build.py
+
+# In sequence, so the build always reads a finished scrape.
+all: $(INSTALLED)
+	$(PY) scrape.py
+	$(PY) build.py

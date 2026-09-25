@@ -155,3 +155,13 @@ def test_quarantine_filters_headers_case_insensitively(tmp_path):
     details = json.loads(kept.with_name(kept.name + ".json").read_text())
     assert details["headers"] == {"LOCATION": "x"}
     assert kept.name == "NYY_2024.shtml.20260925T040000Z"
+
+
+def test_a_failed_stage_leaves_no_partial(tmp_path, monkeypatch):
+    def broken_fsync(fd):
+        raise OSError("disk full")
+
+    monkeypatch.setattr(cache.os, "fsync", broken_fsync)
+    with pytest.raises(OSError, match="disk full"):
+        cache.stage(tmp_path / "page.shtml", b"new")
+    assert list(tmp_path.iterdir()) == []

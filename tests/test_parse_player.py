@@ -66,6 +66,8 @@ def test_every_cached_player_page_gives_a_complete_profile(cached_players):
         (b"August 13, 2016", b"TBD", "no height, weight, birthplace or debut"),
         (b"<h1>", b"<div>", "no profile header"),
         (b"&nbsp;&bull;&nbsp;", b" | ", "no bats and throws"),
+        (b'data-birth="1992-04-26"', b'data-born="1992-04-26"', "birth date '' is not a date"),
+        (b"August 13, 2016", b"Augst 13, 2016", "debut 'Augst 13, 2016' is not a date"),
         (b"<span>Aaron Judge</span>", b"<span></span>", "no name in the profile header"),
         # Without the place span only the country flag follows the date; it must not be read.
         (PLACE, b"", "no height, weight, birthplace or debut"),

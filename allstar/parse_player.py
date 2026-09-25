@@ -2,11 +2,17 @@
 
 import re
 from dataclasses import dataclass
-from datetime import datetime
+from datetime import date
 
 from bs4 import BeautifulSoup, Tag
 
 HANDS = {"Right": "R", "Left": "L", "Both": "S"}
+# The pages print debut dates in English. A month table, unlike strptime's %B, does not
+# depend on the machine's locale.
+MONTHS = [
+    *["January", "February", "March", "April", "May", "June"],
+    *["July", "August", "September", "October", "November", "December"],
+]
 
 
 @dataclass(frozen=True)
@@ -69,6 +75,14 @@ def read_player(page: bytes, player_id: str) -> Player:
     name = words(meta.find("h1"))
     if not name:
         raise ValueError(f"{player_id}: no name in the profile header")
+    born = birth.get("data-birth", "")
+    if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", born):
+        raise ValueError(f"{player_id}: birth date {born!r} is not a date")
+    try:
+        month, day, year = debut.group(1).replace(",", "").split()
+        debut_date = date(int(year), MONTHS.index(month) + 1, int(day)).isoformat()
+    except ValueError:
+        raise ValueError(f"{player_id}: debut {debut.group(1)!r} is not a date") from None
     feet, inches, pounds = (int(group) for group in size.groups())
     return Player(
         player_id=player_id,
@@ -78,7 +92,7 @@ def read_player(page: bytes, player_id: str) -> Player:
         throws=HANDS[hands.group(2)],
         height_inches=feet * 12 + inches,
         weight_lbs=pounds,
-        birth_date=birth["data-birth"],
+        birth_date=born,
         birth_place=place.removeprefix("in "),
-        debut_date=datetime.strptime(debut.group(1), "%B %d, %Y").date().isoformat(),
+        debut_date=debut_date,
     )

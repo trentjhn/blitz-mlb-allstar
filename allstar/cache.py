@@ -48,8 +48,8 @@ def save_manifest(raw_dir: Path, manifest: dict[str, dict]) -> None:
     write_atomic(raw_dir / MANIFEST_NAME, text.encode())
 
 
-def write_atomic(path: Path, data: bytes) -> None:
-    """Write via a synced temp file and a rename, so no crash leaves half a file behind."""
+def stage(path: Path, data: bytes) -> Path:
+    """Write data to a synced temp file beside path, for the caller to rename into place."""
     path.parent.mkdir(parents=True, exist_ok=True)
     fd, tmp = tempfile.mkstemp(dir=path.parent, prefix=f".{path.name}.", suffix=PARTIAL_SUFFIX)
     try:
@@ -58,9 +58,19 @@ def write_atomic(path: Path, data: bytes) -> None:
             handle.flush()
             os.fsync(handle.fileno())
         os.chmod(tmp, 0o644)
-        os.replace(tmp, path)
     except BaseException:
         Path(tmp).unlink(missing_ok=True)
+        raise
+    return Path(tmp)
+
+
+def write_atomic(path: Path, data: bytes) -> None:
+    """Write via a synced temp file and a rename, so no crash leaves half a file behind."""
+    tmp = stage(path, data)
+    try:
+        os.replace(tmp, path)
+    except BaseException:
+        tmp.unlink(missing_ok=True)
         raise
 
 
