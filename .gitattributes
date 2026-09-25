@@ -1,0 +1,4 @@
+# Cached pages are stored byte for byte; their SHA-256 in the manifest must keep matching.
+data/raw/** binary
+# The manifest is ours and plain JSON: keep it diffable, but never rewrite its line endings.
+data/raw/manifest.json -text diff

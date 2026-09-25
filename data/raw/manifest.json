@@ -1,0 +1,32 @@
+{
+  "https://www.baseball-reference.com/allstar/2024-allstar-game.shtml": {
+    "bytes": 444341,
+    "fetched_at": "2026-09-25T07:09:13Z",
+    "path": "allstar/2024-allstar-game.shtml",
+    "sha256": "782bfd461b1b91745f4a54a0d74a82c48116552f7caf72dcad08e9f150bef20e"
+  },
+  "https://www.baseball-reference.com/leagues/majors/2024.shtml": {
+    "bytes": 527815,
+    "fetched_at": "2026-09-25T07:09:09Z",
+    "path": "seasons/2024.shtml",
+    "sha256": "e5487de40b8a7755e3aaa8aab0a1c863cb71b9a73af2318882b5af9d2471751c"
+  },
+  "https://www.baseball-reference.com/players/j/judgeaa01.shtml": {
+    "bytes": 704040,
+    "fetched_at": "2026-09-25T04:24:20Z",
+    "path": "players/judgeaa01.shtml",
+    "sha256": "8521e85e3d02a6793156daa68cfa2db62ac6d97d97adbd2279ad6ba7183a897f"
+  },
+  "https://www.baseball-reference.com/teams/NYY/2024.shtml": {
+    "bytes": 888068,
+    "fetched_at": "2026-09-25T04:24:16Z",
+    "path": "teams/NYY_2024.shtml",
+    "sha256": "8fabbe5c40f77decdb38f1afd3421b8d18906f4d9009538e3b9d9509c3dfad6f"
+  },
+  "https://www.theshowratings.com/lists/top-100-players": {
+    "bytes": 240447,
+    "fetched_at": "2026-09-25T04:24:12Z",
+    "path": "the_show/top-100-players.html",
+    "sha256": "3ddd9c74bd6e96e5cdde807abecb382d33e22b702200ae485d2b804399206761"
+  }
+}

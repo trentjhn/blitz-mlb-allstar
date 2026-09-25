@@ -4,3 +4,7 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 .DS_Store
+data/quarantine/
+data/.scrape.lock
+data/.scrape.blocked
+data/**/.*.partial
