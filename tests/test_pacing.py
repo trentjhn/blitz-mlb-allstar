@@ -1,3 +1,4 @@
+import os
 import subprocess
 import sys
 
@@ -89,3 +90,16 @@ def test_a_lock_file_deleted_mid_run_stops_the_run(tmp_path, clock):
         lock.unlink()
         with pytest.raises(StopScrape, match="deleted during the run"):
             pacer.wait_turn()
+
+
+def test_checking_a_block_leaves_no_file_open(tmp_path, clock):
+    (tmp_path / ".blocked").write_text("HTTP 429")
+    pacer = RequestPacer(
+        tmp_path / ".scrape.lock", block_path=tmp_path / ".blocked", clock=clock, sleep=clock.sleep
+    )
+    with pacer:
+        open_before = len(os.listdir("/dev/fd"))
+        for _ in range(100):
+            with pytest.raises(StopScrape):
+                pacer.wait_turn()
+        assert len(os.listdir("/dev/fd")) == open_before

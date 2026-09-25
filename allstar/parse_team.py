@@ -48,7 +48,8 @@ class AllStarRow:
 
 def read_team(page: bytes, team_id: str, season: int) -> Team:
     # Both facts sit in the page header, so a text search is enough; no need to parse the page.
-    text = page.decode("utf-8", "replace")
+    # Comments are dropped first, so a stale heading or record kept in one is never read.
+    text = re.sub(r"<!--.*?-->", "", page.decode("utf-8", "replace"), flags=re.DOTALL)
     h1 = re.search(r"<h1[^>]*>(.*?)</h1>", text, re.DOTALL)
     heading = " ".join(html.unescape(re.sub(r"<[^>]+>", " ", h1.group(1))).split()) if h1 else ""
     name = re.fullmatch(rf"{season} (.+?) Statistics", heading)
@@ -95,7 +96,11 @@ def all_star_rows(page: bytes, season: int) -> list[AllStarRow]:
         labels = stat_labels(table, table_id, NEEDED[stat_type])
         for tr in table.select("tbody > tr"):
             awards = tr.find(attrs={"data-stat": "awards"})
-            if awards is None or awards.find("a", href=game) is None:
+            # Every row has an Awards cell, the header rows repeated in the body included, so a
+            # row without one means the table changed.
+            if awards is None:
+                raise ValueError(f"{season} {table_id}: a row has no awards cell")
+            if awards.find("a", href=game) is None:
                 continue
             cells = {td["data-stat"]: td for td in tr.find_all(["td", "th"]) if td.get("data-stat")}
             missing = (NEEDED[stat_type] | labels.keys()) - cells.keys()

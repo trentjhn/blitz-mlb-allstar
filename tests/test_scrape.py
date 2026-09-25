@@ -11,7 +11,13 @@ from allstar import config
 from allstar.cache import load_manifest, save_manifest
 from allstar.discover import allstar_url, league_url, team_urls
 from allstar.fetch import Fetcher, StopScrape
-from tests.fakes import FakeResponse, FakeSite, make_fetcher, passing_page
+from tests.fakes import (
+    FakeResponse,
+    FakeSite,
+    make_fetcher,
+    passing_page,
+    team_page_with_all_stars,
+)
 
 
 def team_codes(count):
@@ -19,6 +25,17 @@ def team_codes(count):
 
 
 CODES = team_codes(30)
+
+
+def all_stars(code, season):
+    """The fake site's All-Stars for a team: a batter chosen every season, a pitcher chosen only
+    this season, and one player chosen for two teams in the same season and in both tables."""
+    shared = ["twoway01"] if code in CODES[:2] and season == config.SEASONS[-1] else []
+    return [f"{code.lower()}01", *shared], [f"p{code.lower()}{season % 100}", *shared]
+
+
+def player_url(player_id):
+    return f"{config.BR_BASE}/players/{player_id[0]}/{player_id}.shtml"
 
 
 def league_page(season, codes=CODES):
@@ -67,7 +84,18 @@ def test_pages_are_fetched_in_the_planned_order(monkeypatch):
         pages[league_url(season)] = league_page(season)
         pages[allstar_url(season)] = b"game"
         for code in CODES:
-            pages[f"{config.BR_BASE}/teams/{code}/{season}.shtml"] = b"team"
+            url = f"{config.BR_BASE}/teams/{code}/{season}.shtml"
+            pages[url] = team_page_with_all_stars(url, season, *all_stars(code, season))
+    players = sorted(
+        {
+            player_url(pid)
+            for s in config.SEASONS
+            for c in CODES
+            for ids in all_stars(c, s)
+            for pid in ids
+        }
+    )
+    pages.update(dict.fromkeys(players, b"player"))
     fetcher = ScriptedFetcher(pages)
 
     handled = scrape.fetch_all(fetcher, report=lambda *args: None)
@@ -83,6 +111,7 @@ def test_pages_are_fetched_in_the_planned_order(monkeypatch):
             *teams,
             allstar_url(2024),
             allstar_url(2025),
+            *players,
         ]
     )
     assert len(set(handled)) == len(handled)
@@ -106,7 +135,9 @@ def whole_site():
         pages[allstar_url(season)] = passing_page(allstar_url(season))
         for code in CODES:
             url = f"{config.BR_BASE}/teams/{code}/{season}.shtml"
-            pages[url] = passing_page(url)
+            pages[url] = team_page_with_all_stars(url, season, *all_stars(code, season))
+            for player_id in (pid for ids in all_stars(code, season) for pid in ids):
+                pages[player_url(player_id)] = passing_page(player_url(player_id))
     return pages
 
 
@@ -135,7 +166,7 @@ def test_a_full_run_requests_each_page_once_and_the_next_run_none(site, caplog):
 
     assert scrape.main([]) == 0
     assert site.calls == []
-    assert "done: 97 pages, 0 requests" in caplog.text
+    assert f"done: {len(site.pages)} pages, 0 requests" in caplog.text
 
 
 def test_force_requests_each_page_exactly_once(full_cache, site):
@@ -146,7 +177,7 @@ def test_force_requests_each_page_exactly_once(full_cache, site):
 def test_check_cache_passes_on_a_full_cache_without_a_request(full_cache, site, caplog):
     caplog.set_level(logging.INFO)
     assert scrape.main(["--check-cache"]) == 0
-    assert "cache complete: 97 pages" in caplog.text
+    assert f"cache complete: {len(site.pages)} pages" in caplog.text
     assert site.calls == []
 
 
@@ -191,7 +222,8 @@ def test_check_cache_changes_nothing_even_when_it_fails(full_cache, site, caplog
 def test_check_cache_fails_on_a_damaged_page_the_run_never_reads(
     full_cache, site, empty_project, clock, caplog
 ):
-    # A player page is outside this run, so only the manifest comparison can catch the damage.
+    # Judge is no All-Star on the fake site, so his page is outside this run: only the manifest
+    # comparison can catch damage to it.
     player = f"{config.BR_BASE}/players/j/judgeaa01.shtml"
     fetcher, _ = make_fetcher(empty_project, clock, FakeResponse(200, passing_page(player)))
     with fetcher:
@@ -305,3 +337,41 @@ def test_force_and_offline_are_mutually_exclusive(empty_project):
     with pytest.raises(SystemExit) as exit_info:
         scrape.main(["--force", "--offline"])
     assert exit_info.value.code == 2
+
+
+def test_a_team_page_that_does_not_parse_stops_the_run_before_any_player_request(site, caplog):
+    url = f"{config.BR_BASE}/teams/{CODES[3]}/2025.shtml"
+    site.pages[url] = passing_page(url)  # passes the write gate but has no stat tables
+    assert scrape.main([]) == 1
+    assert f"stopped: {url}: 2025 team page: no players_standard_batting table" in caplog.text
+    assert not any("/players/" in call for call in site.calls)
+
+
+def test_a_refusal_in_the_player_stage_stops_the_run_and_the_next_one(site, caplog, monkeypatch):
+    refused = player_url(f"p{CODES[5].lower()}25")
+    serve = site.get
+
+    def refuse_one(url, **kwargs):
+        if url == refused:
+            site.calls.append(url)
+            return FakeResponse(429)
+        return serve(url, **kwargs)
+
+    monkeypatch.setattr(site, "get", refuse_one)
+    assert scrape.main([]) == 1
+    assert f"stopped: {refused}: HTTP 429" in caplog.text
+    assert site.calls[-1] == refused
+    site.calls.clear()
+    assert scrape.main([]) == 1
+    assert site.calls == []
+
+
+def test_a_player_link_outside_the_cache_rules_stops_the_run_before_any_player_request(
+    site, caplog
+):
+    url = f"{config.BR_BASE}/teams/{CODES[3]}/2025.shtml"
+    # A player page's letter folder must match the id's first letter; this link breaks that.
+    site.pages[url] = site.pages[url].replace(b'href="/players/t/', b'href="/players/x/', 1)
+    assert scrape.main([]) == 1
+    assert f"no cache rule for {config.BR_BASE}/players/x/tad01.shtml" in caplog.text
+    assert not any("/players/" in call for call in site.calls)

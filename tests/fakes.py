@@ -20,7 +20,38 @@ TEAM_PAGE = team_page()
 def passing_page(url: str, extra: bytes = b"") -> bytes:
     """A page that passes the write gate for any cached URL: its checks, filler, a closing tag."""
     page = page_for(url)
-    return b"<html>" + b" ".join(page.markers) + extra + b" " * page.min_bytes + b"</html>\n"
+    # The first check is the canonical link, left open by page_for; close it so the rest parses.
+    canonical, *markers = page.markers
+    head = b"<html><head>" + canonical + b" /></head><body>" + b" ".join(markers)
+    return head + extra + b" " * page.min_bytes + b"</body></html>\n"
+
+
+def team_page_with_all_stars(url: str, season: int, batters=(), pitchers=()) -> bytes:
+    """A team page that passes the write gate and marks these player ids as All-Stars."""
+
+    def table(table_id, columns, player_ids):
+        head = "".join(f'<th data-stat="{c}">{c}</th>' for c in columns)
+        cells = {
+            "name_display": '<a href="/players/{letter}/{id}.shtml">{id}</a>',
+            "awards": f'<a href="/allstar/{season}-allstar-game.shtml">AS</a>',
+        }
+        rows = "".join(
+            "<tr>"
+            + "".join(
+                f'<td data-stat="{c}">' + cells.get(c, "1").format(letter=pid[0], id=pid) + "</td>"
+                for c in columns
+            )
+            + "</tr>"
+            for pid in player_ids
+        )
+        return f'<table id="{table_id}"><thead><tr>{head}</tr></thead><tbody>{rows}</tbody></table>'
+
+    batting = ["name_display", "age", "team_position", "b_hr", "pos", "awards"]
+    pitching = ["name_display", "age", "team_position", "p_w", "awards"]
+    tables = table("players_standard_batting", batting, batters) + table(
+        "players_standard_pitching", pitching, pitchers
+    )
+    return passing_page(url, tables.encode())
 
 
 class FakeResponse:

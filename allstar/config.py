@@ -10,6 +10,10 @@ LOCK_PATH = ROOT / "data" / ".scrape.lock"
 # another request (cached pages still load), because Baseball Reference blocks can last a day.
 BLOCK_PATH = ROOT / "data" / ".scrape.blocked"
 
+# A block record is one line of about 140 bytes; reading at most this much keeps a stray file
+# at the block path from flooding the stop message.
+BLOCK_RECORD_MAX_BYTES = 500
+
 SEASONS = (2024, 2025, 2026)
 # Each season's league page must link exactly this many team pages, or the run stops.
 TEAMS_PER_SEASON = 30

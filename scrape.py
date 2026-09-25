@@ -1,8 +1,9 @@
 """Fetch every page the dataset needs into data/raw/, politely and at most once.
 
 Order: the MLB The Show top-100 list, then each season's league page (which lists that
-season's team pages), then every team page, then each season's All-Star game page.
-Cached pages are read from disk and never requested again.
+season's team pages), then every team page, then each season's All-Star game page, then
+the player page of every All-Star the team pages mark. Cached pages are read from disk and
+never requested again.
 
     python scrape.py                 fetch only what is missing (nothing, on a full cache)
     python scrape.py --force         re-fetch every page, once each
@@ -23,6 +24,8 @@ from allstar import config
 from allstar.cache import check_cache
 from allstar.discover import allstar_url, league_url, team_urls
 from allstar.fetch import Fetcher, StopScrape
+from allstar.pages import page_for
+from allstar.parse_team import all_star_rows
 
 log = logging.getLogger("scrape")
 
@@ -44,11 +47,26 @@ def fetch_all(fetcher: Fetcher, report: Callable[..., None] = log.info) -> list[
         return body
 
     get(config.SHOW_URL)
-    teams = [url for season in config.SEASONS for url in team_urls(get(league_url(season)), season)]
-    for url in teams:
-        get(url)
+    teams = {season: team_urls(get(league_url(season)), season) for season in config.SEASONS}
+    players: set[str] = set()
+    for season, urls in teams.items():
+        for url in urls:
+            page = get(url)
+            try:
+                rows = all_star_rows(page, season)
+            except ValueError as exc:
+                raise ValueError(f"{url}: {exc}") from exc
+            players.update(row.player_url for row in rows)
     for season in config.SEASONS:
         get(allstar_url(season))
+    # A player who was an All-Star in several seasons, or for two teams, is fetched once.
+    # Every URL is checked against the cache rules first, so a bad link stops the run
+    # before this stage sends anything.
+    ordered = sorted(players)
+    for url in ordered:
+        page_for(url)
+    for url in ordered:
+        get(url)
     return handled
 
 

@@ -14,5 +14,7 @@ def find_by_id(soup: BeautifulSoup, tag: str, element_id: str) -> Tag | None:
         return found
     for comment in soup.find_all(string=lambda text: isinstance(text, Comment)):
         if f'id="{element_id}"' in comment:
-            return BeautifulSoup(comment, "html.parser").find(tag, id=element_id)
+            found = BeautifulSoup(comment, "html.parser").find(tag, id=element_id)
+            if found is not None:
+                return found
     return None

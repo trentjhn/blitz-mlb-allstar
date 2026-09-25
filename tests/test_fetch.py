@@ -1,6 +1,7 @@
 import hashlib
 import json
 import os
+import re
 import subprocess
 import sys
 from itertools import pairwise
@@ -11,7 +12,15 @@ import requests
 from allstar import config
 from allstar.fetch import StopScrape, make_session
 from allstar.pacing import RequestPacer
-from tests.fakes import OTHER_TEAM_URL, TEAM_PAGE, TEAM_URL, FakeResponse, make_fetcher, team_page
+from tests.fakes import (
+    OTHER_TEAM_URL,
+    TEAM_PAGE,
+    TEAM_URL,
+    FakeResponse,
+    make_fetcher,
+    passing_page,
+    team_page,
+)
 
 
 def quarantined(tmp_path, name="teams/NYY_2024.shtml"):
@@ -247,7 +256,7 @@ def test_complete_page_left_unlisted_by_an_interrupted_run_is_kept(tmp_path, clo
     assert entry["fetched_at"] == "2025-09-23T04:00:00Z"
 
 
-def test_incomplete_page_left_unlisted_is_quarantined_and_fetched_again(tmp_path, clock):
+def test_incomplete_page_left_unlisted_is_quarantined_and_fetched_again(tmp_path, clock, caplog):
     page = tmp_path / "raw/teams/NYY_2024.shtml"
     page.parent.mkdir(parents=True)
     page.write_bytes(TEAM_PAGE[:55_000])
@@ -256,6 +265,7 @@ def test_incomplete_page_left_unlisted_is_quarantined_and_fetched_again(tmp_path
         assert fetcher.get(TEAM_URL) == TEAM_PAGE
     assert len(session.calls) == 1
     assert quarantined(tmp_path)[0] == TEAM_PAGE[:55_000]
+    assert "NYY_2024.shtml to quarantine: an interrupted run left it incomplete" in caplog.text
 
 
 def test_listed_page_that_went_missing_is_fetched_again(tmp_path, clock):
@@ -354,7 +364,9 @@ def test_a_refusal_blocks_later_requests_until_the_block_file_is_deleted(tmp_pat
     later, session = make_fetcher(tmp_path, clock, FakeResponse(200, team_page(url=OTHER_TEAM_URL)))
     with later:
         assert later.get(TEAM_URL) == TEAM_PAGE
-        with pytest.raises(StopScrape, match=r"Delete .*scrape\.blocked"):
+        # The stop names the refused URL, read back from the block file.
+        refused = rf"{re.escape(OTHER_TEAM_URL)}.*Delete .*scrape\.blocked"
+        with pytest.raises(StopScrape, match=refused):
             later.get(OTHER_TEAM_URL)
     assert session.calls == []
     (tmp_path / ".scrape.blocked").unlink()
@@ -437,8 +449,9 @@ STRAY = "is not a readable block record"
 def test_anything_at_the_block_path_blocks_requests(tmp_path, clock, entry, message):
     entry(tmp_path / ".scrape.blocked")
     fetcher, session = make_fetcher(tmp_path, clock, FakeResponse(200, TEAM_PAGE))
-    with fetcher, pytest.raises(StopScrape, match=message):
+    with fetcher, pytest.raises(StopScrape, match=message) as stopped:
         fetcher.get(TEAM_URL)
+    assert str(tmp_path / ".scrape.blocked") in str(stopped.value)
     assert session.calls == []
     assert not (tmp_path / "missing.txt").exists()
 
@@ -631,3 +644,29 @@ def test_an_interrupted_write_stops_the_run(tmp_path, clock, monkeypatch):
         with pytest.raises(StopScrape, match="already stopped"):
             fetcher.get(OTHER_TEAM_URL)
     assert len(session.calls) == 1
+
+
+PLAYER = "https://www.baseball-reference.com/players/j/judgeaa01.shtml"
+
+
+@pytest.mark.parametrize(
+    ("body", "reason"),
+    [
+        (passing_page(PLAYER).replace(b"Born:", b"Birth"), "missing expected"),
+        (
+            b'<html><head><link rel="canonical" href="' + PLAYER.encode() + b'" /></head>'
+            b"<body>Born:</body></html>\n",
+            "expected at least 50000",
+        ),
+        (
+            passing_page("https://www.baseball-reference.com/players/s/sotoju01.shtml"),
+            "missing expected",
+        ),
+    ],
+    ids=["no-born", "too-small", "another-players-page"],
+)
+def test_a_player_page_that_fails_the_gate_is_not_cached(tmp_path, clock, body, reason):
+    fetcher, _ = make_fetcher(tmp_path, clock, FakeResponse(200, body))
+    with fetcher, pytest.raises(StopScrape, match=reason):
+        fetcher.get(PLAYER)
+    assert not (tmp_path / "raw/players/judgeaa01.shtml").exists()

@@ -113,7 +113,7 @@ class RequestPacer:
         try:
             if not stat.S_ISREG(os.fstat(fd).st_mode):
                 return None
-            return os.read(fd, 500).decode("utf-8", "replace").strip()
+            return os.read(fd, config.BLOCK_RECORD_MAX_BYTES).decode("utf-8", "replace").strip()
         except OSError:
             return None
         finally:

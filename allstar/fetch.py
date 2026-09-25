@@ -152,6 +152,7 @@ class Fetcher:
             return body
         keep_rejected(self.quarantine_dir, url, "unlisted, incomplete", None, {}, body, self.now())
         path.unlink()
+        log.warning("moved %s to quarantine: an interrupted run left it incomplete", path)
         return None
 
     def _stop(self, url: str, refused: Refused) -> NoReturn:

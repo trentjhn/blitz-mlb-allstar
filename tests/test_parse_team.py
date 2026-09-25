@@ -22,7 +22,7 @@ def by_player(rows):
     return {(row.player_id, row.stat_type): row for row in rows}
 
 
-def edit_batting_table(old, new, table_id="players_standard_batting"):
+def edit_stat_table(old, new, table_id="players_standard_batting"):
     """NYY 2024 with one change inside one of its regular-season stat tables."""
     start = NYY_2024.rindex(b"<table", 0, NYY_2024.index(f'id="{table_id}"'.encode()))
     end = NYY_2024.index(b"</table>", start)
@@ -181,14 +181,14 @@ RENAMED = [
 @pytest.mark.parametrize(("table_id", "column"), RENAMED)
 def test_a_renamed_column_is_an_error_not_an_empty_field(table_id, column):
     header = f'data-stat="{column}" scope="col"'.encode()
-    page = edit_batting_table(header, b'data-stat="x" scope="col"', table_id)
+    page = edit_stat_table(header, b'data-stat="x" scope="col"', table_id)
     with pytest.raises(ValueError, match=f"no {column} column"):
         all_star_rows(page, 2024)
 
 
 def test_a_stat_column_renamed_in_the_header_is_an_error():
     # The rows keep a b_hr cell that no header column names, and lose the one the header does.
-    page = edit_batting_table(b'data-stat="b_hr" scope="col"', b'data-stat="b_hrx" scope="col"')
+    page = edit_stat_table(b'data-stat="b_hr" scope="col"', b'data-stat="b_hrx" scope="col"')
     with pytest.raises(ValueError, match="an All-Star row has no b_hrx cell"):
         all_star_rows(page, 2024)
 
@@ -196,7 +196,7 @@ def test_a_stat_column_renamed_in_the_header_is_an_error():
 def test_an_all_star_row_missing_a_cell_is_an_error():
     name_cell = b'<a href="/players/j/judgeaa01.shtml">Aaron Judge</a></td>'
     age_cell = b' <td class="right " data-stat="age" >32</td>'
-    page = edit_batting_table(name_cell + age_cell, name_cell)
+    page = edit_stat_table(name_cell + age_cell, name_cell)
     with pytest.raises(ValueError, match="an All-Star row has no age cell"):
         all_star_rows(page, 2024)
 
@@ -217,21 +217,23 @@ def test_a_stat_table_without_a_header_or_a_body_is_an_error(part):
 
 
 def test_a_row_of_group_headings_in_the_header_is_ignored():
+    # Group headings with a data-stat of their own: only the last header row names columns.
     headings = (
-        b'<thead><tr><th colspan="10">Batting</th><th colspan="5" data-stat="">Rates</th></tr>'
+        b'<thead><tr><th colspan="10" data-stat="header_tmp">Batting</th>'
+        b'<th colspan="5" data-stat="header_rates">Rates</th></tr>'
     )
-    judge = by_player(all_star_rows(edit_batting_table(b"<thead>", headings), 2024))
+    judge = by_player(all_star_rows(edit_stat_table(b"<thead>", headings), 2024))
     assert " ".join(judge[("judgeaa01", "batting")].stats) == BATTING
 
 
 def test_rows_in_a_second_table_body_are_read():
     row = b'<tr > <th scope="row" class="right " data-stat="ranker" csk="2" >7</th>'
-    page = edit_batting_table(row, b"</tbody><tbody>" + row)
+    page = edit_stat_table(row, b"</tbody><tbody>" + row)
     assert ("judgeaa01", "batting") in by_player(all_star_rows(page, 2024))
 
 
 def test_a_name_with_non_breaking_spaces_reads_as_plain_words():
-    page = edit_batting_table(b">Aaron Judge</a>", b">Aaron&nbsp;Judge</a>")
+    page = edit_stat_table(b">Aaron Judge</a>", b">Aaron&nbsp;Judge</a>")
     assert by_player(all_star_rows(page, 2024))[("judgeaa01", "batting")].name == "Aaron Judge"
 
 
@@ -245,7 +247,7 @@ JUDGE_HR = b'<td class="right " data-stat="b_hr" ><strong><em>58</em></strong></
 )
 def test_an_all_star_row_missing_a_stat_cell_is_an_error(cell):
     with pytest.raises(ValueError, match="an All-Star row has no b_hr cell"):
-        all_star_rows(edit_batting_table(JUDGE_HR, cell), 2024)
+        all_star_rows(edit_stat_table(JUDGE_HR, cell), 2024)
 
 
 def test_a_page_without_the_record_line_is_an_error():
@@ -260,3 +262,25 @@ def test_an_all_star_link_to_another_site_does_not_count():
         b'href="https://example.com/allstar/2024-allstar-game.shtml"',
     )
     assert all_star_rows(page, 2024) == []
+
+
+def test_a_row_without_an_awards_cell_is_an_error():
+    wells = b'<td class="left " data-stat="awards" >'
+    wells += b'<a href="/awards/awards_2024.shtml#all_AL_ROY_voting">ROY-3</a></td>'
+    page = edit_stat_table(wells, b"")
+    with pytest.raises(ValueError, match="a row has no awards cell"):
+        all_star_rows(page, 2024)
+
+
+def test_a_heading_or_record_inside_a_comment_is_not_read():
+    stale = b"<!-- <h1>2024 Old Name Statistics</h1> <strong>Record:</strong> 1-2 -->"
+    team = read_team(stale + NYY_2024, "NYY", 2024)
+    assert (team.name, team.wins, team.losses) == ("New York Yankees", 94, 68)
+
+
+def test_a_comment_that_only_mentions_a_tables_id_is_passed_over():
+    start = NYY_2024.rindex(b"<table", 0, NYY_2024.index(b'id="players_standard_batting"'))
+    end = NYY_2024.index(b"</table>", start) + len(b"</table>")
+    decoy = b'<!-- the table with id="players_standard_batting" is below -->'
+    hidden = NYY_2024[:start] + decoy + b"<!--" + NYY_2024[start:end] + b"-->" + NYY_2024[end:]
+    assert ("judgeaa01", "batting") in by_player(all_star_rows(hidden, 2024))
