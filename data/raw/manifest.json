@@ -35,11 +35,1067 @@
     "path": "seasons/2026.shtml",
     "sha256": "6e6f440fd7ff0b6485021dfd3dbb3d9f66917e1fc9bf3bffe2df77b96e15ba99"
   },
+  "https://www.baseball-reference.com/players/a/abbotan01.shtml": {
+    "bytes": 319017,
+    "fetched_at": "2026-09-25T14:10:35Z",
+    "path": "players/abbotan01.shtml",
+    "sha256": "7587f61332c3c98848851430c10b4399c85af049787eca91cacb105307d12b4f"
+  },
+  "https://www.baseball-reference.com/players/a/abramcj01.shtml": {
+    "bytes": 387431,
+    "fetched_at": "2026-09-25T14:10:39Z",
+    "path": "players/abramcj01.shtml",
+    "sha256": "e754285d8283a4e475972b1175f2f11b3dacd584aa47a25311d1eb1111b2ac97"
+  },
+  "https://www.baseball-reference.com/players/a/acunaro01.shtml": {
+    "bytes": 593208,
+    "fetched_at": "2026-09-25T14:10:43Z",
+    "path": "players/acunaro01.shtml",
+    "sha256": "6b85e904131b58f32e85292028518c21379cdd728847aa548317288da91898ba"
+  },
+  "https://www.baseball-reference.com/players/a/adamja01.shtml": {
+    "bytes": 618585,
+    "fetched_at": "2026-09-25T14:10:47Z",
+    "path": "players/adamja01.shtml",
+    "sha256": "a1687c48b8428cdfb27aa8464f7b015aa7befd0f7f3aa1a003550138d7f4638e"
+  },
+  "https://www.baseball-reference.com/players/a/albieoz01.shtml": {
+    "bytes": 537248,
+    "fetched_at": "2026-09-25T14:10:51Z",
+    "path": "players/albieoz01.shtml",
+    "sha256": "11505d09975de4ff89e5c20f4316e6bda8811ae52cdb10abf68011482c2ae264"
+  },
+  "https://www.baseball-reference.com/players/a/alonspe01.shtml": {
+    "bytes": 550902,
+    "fetched_at": "2026-09-25T14:10:55Z",
+    "path": "players/alonspe01.shtml",
+    "sha256": "de46d21f267dd8c39e06ee258984ce64df9d53b65e1cb9a127b38172077d2173"
+  },
+  "https://www.baseball-reference.com/players/a/altuvjo01.shtml": {
+    "bytes": 755586,
+    "fetched_at": "2026-09-25T14:10:59Z",
+    "path": "players/altuvjo01.shtml",
+    "sha256": "7ecbef797d3efb3bf1f2596863fef3c491fb987c25d3d3a9f1897a188f292ff4"
+  },
+  "https://www.baseball-reference.com/players/a/alvaryo01.shtml": {
+    "bytes": 563610,
+    "fetched_at": "2026-09-25T14:11:03Z",
+    "path": "players/alvaryo01.shtml",
+    "sha256": "36fbef731e544616c0457d2173ce5c0906e6b27550f9d1d450279b49b5534fa8"
+  },
+  "https://www.baseball-reference.com/players/a/anderty01.shtml": {
+    "bytes": 710715,
+    "fetched_at": "2026-09-25T14:11:07Z",
+    "path": "players/anderty01.shtml",
+    "sha256": "fb12551d92e9f4a40643244b343d6d3713c9bb7d79bd8a4d3db1c9bbf7790072"
+  },
+  "https://www.baseball-reference.com/players/a/arandjo01.shtml": {
+    "bytes": 386359,
+    "fetched_at": "2026-09-25T14:11:11Z",
+    "path": "players/arandjo01.shtml",
+    "sha256": "e124f8b272a61515c959e2b589d49bd7b181406928aff5a7c2a0ae2470cb8979"
+  },
+  "https://www.baseball-reference.com/players/a/arozara01.shtml": {
+    "bytes": 641502,
+    "fetched_at": "2026-09-25T14:11:15Z",
+    "path": "players/arozara01.shtml",
+    "sha256": "cf403851ac17f41825a0c2fc4ff3310b424f34edb423eee6435dc621f30e6812"
+  },
+  "https://www.baseball-reference.com/players/a/arraelu01.shtml": {
+    "bytes": 640727,
+    "fetched_at": "2026-09-25T14:11:19Z",
+    "path": "players/arraelu01.shtml",
+    "sha256": "040a09ac020f88e3aac4a27b5f2463e172e969ea2ab84c85261762ed13016bef"
+  },
+  "https://www.baseball-reference.com/players/a/ashcrbr01.shtml": {
+    "bytes": 276444,
+    "fetched_at": "2026-09-25T14:11:23Z",
+    "path": "players/ashcrbr01.shtml",
+    "sha256": "7ddd8c0e433b193b7e46d71d405019e399d7dfafa7e1bb129343d8d252779c9c"
+  },
+  "https://www.baseball-reference.com/players/b/baezja01.shtml": {
+    "bytes": 719209,
+    "fetched_at": "2026-09-25T14:11:27Z",
+    "path": "players/baezja01.shtml",
+    "sha256": "8406f4952141f6288f1f76b5839fdd200d303da868e76504ccf85920f44920ed"
+  },
+  "https://www.baseball-reference.com/players/b/bakerbr01.shtml": {
+    "bytes": 497298,
+    "fetched_at": "2026-09-25T14:11:31Z",
+    "path": "players/bakerbr01.shtml",
+    "sha256": "8fdbe47785e1b2a0a1c33de3ba77628ba44491477e8ac201791f3529c764581f"
+  },
+  "https://www.baseball-reference.com/players/b/baldwdr01.shtml": {
+    "bytes": 286483,
+    "fetched_at": "2026-09-25T14:11:35Z",
+    "path": "players/baldwdr01.shtml",
+    "sha256": "81bf3f88d2799c028de7e78384d6d900ac0bd4e947c6e494ba9fce81261d09b1"
+  },
+  "https://www.baseball-reference.com/players/b/bazzatr01.shtml": {
+    "bytes": 264471,
+    "fetched_at": "2026-09-25T14:11:39Z",
+    "path": "players/bazzatr01.shtml",
+    "sha256": "cf22999ea0aa226d28b3cd9493b47d4a974a6500fb83920c9007d5c86c7fbf53"
+  },
+  "https://www.baseball-reference.com/players/b/bellico01.shtml": {
+    "bytes": 712722,
+    "fetched_at": "2026-09-25T14:11:43Z",
+    "path": "players/bellico01.shtml",
+    "sha256": "8b7f4deb23d44d936609e4dfc2a3dd44ea303d6cecdae26fde1ebb2ecd449e43"
+  },
+  "https://www.baseball-reference.com/players/b/bettsmo01.shtml": {
+    "bytes": 806245,
+    "fetched_at": "2026-09-25T14:11:47Z",
+    "path": "players/bettsmo01.shtml",
+    "sha256": "41bc92ad7d17c714f585b363ad066820b5a1770d83ffaa3bf11f697d6ab6ea9c"
+  },
+  "https://www.baseball-reference.com/players/b/bohmal01.shtml": {
+    "bytes": 476425,
+    "fetched_at": "2026-09-25T14:11:51Z",
+    "path": "players/bohmal01.shtml",
+    "sha256": "7201e4c59d0ee31848976e1d04498e553313ab7db9decaaa1580ca734e76069f"
+  },
+  "https://www.baseball-reference.com/players/b/boydma01.shtml": {
+    "bytes": 742325,
+    "fetched_at": "2026-09-25T14:11:55Z",
+    "path": "players/boydma01.shtml",
+    "sha256": "5587b6a5572780c9be6087166f155420e86e2b1f5da67024a44dd9c710d09e24"
+  },
+  "https://www.baseball-reference.com/players/b/bregmal01.shtml": {
+    "bytes": 719173,
+    "fetched_at": "2026-09-25T14:11:59Z",
+    "path": "players/bregmal01.shtml",
+    "sha256": "01f36a50ac71e55d2c25f0846bd9ed75de5e8b8f047792b249528dbf9af2e5b9"
+  },
+  "https://www.baseball-reference.com/players/b/brownhu01.shtml": {
+    "bytes": 460313,
+    "fetched_at": "2026-09-25T14:12:03Z",
+    "path": "players/brownhu01.shtml",
+    "sha256": "33ad1cc96e35405d8b3930690b9a029f9a337c1d99ae570d80a4e8dc27a58486"
+  },
+  "https://www.baseball-reference.com/players/b/bubickr01.shtml": {
+    "bytes": 538751,
+    "fetched_at": "2026-09-25T14:12:07Z",
+    "path": "players/bubickr01.shtml",
+    "sha256": "b3d9bd7d15191981f06a59953fc4a3999054b7902ea9c8eaf4f1a22bdaa08517"
+  },
+  "https://www.baseball-reference.com/players/b/burneco01.shtml": {
+    "bytes": 675441,
+    "fetched_at": "2026-09-25T14:12:11Z",
+    "path": "players/burneco01.shtml",
+    "sha256": "278129123f43a0584938e8914efa80cc0dc8b5f0c01af766efbe12b88069f81a"
+  },
+  "https://www.baseball-reference.com/players/b/burnsch01.shtml": {
+    "bytes": 366621,
+    "fetched_at": "2026-09-25T14:12:15Z",
+    "path": "players/burnsch01.shtml",
+    "sha256": "8a79766d130146905663de7d6e9fdd1cd14e12b702dbd9ae838928c29c817225"
+  },
+  "https://www.baseball-reference.com/players/b/buxtoby01.shtml": {
+    "bytes": 563856,
+    "fetched_at": "2026-09-25T14:12:19Z",
+    "path": "players/buxtoby01.shtml",
+    "sha256": "db84e0b4657b7f15d23b747032065d518e32505c8515fff305cd0a9a776b5c15"
+  },
+  "https://www.baseball-reference.com/players/c/caminju01.shtml": {
+    "bytes": 402875,
+    "fetched_at": "2026-09-25T14:12:23Z",
+    "path": "players/caminju01.shtml",
+    "sha256": "7de5b3663f4746ce60d585a323e79d4dfad9f9106517dbd8be3cee19ead934a8"
+  },
+  "https://www.baseball-reference.com/players/c/carroco02.shtml": {
+    "bytes": 473041,
+    "fetched_at": "2026-09-25T14:12:27Z",
+    "path": "players/carroco02.shtml",
+    "sha256": "ce50b5c5d9be6b6dc9f06b1001e1c2c50193af9b0b5bd1dbf68d41ab8b31a808"
+  },
+  "https://www.baseball-reference.com/players/c/castrwi01.shtml": {
+    "bytes": 682733,
+    "fetched_at": "2026-09-25T14:12:31Z",
+    "path": "players/castrwi01.shtml",
+    "sha256": "54a57b761838f88c3e8be793ad419bbc27311cd9fb0405d448e4d8c7c8dc765f"
+  },
+  "https://www.baseball-reference.com/players/c/ceasedy01.shtml": {
+    "bytes": 651989,
+    "fetched_at": "2026-09-25T14:12:35Z",
+    "path": "players/ceasedy01.shtml",
+    "sha256": "303110951f8c16b6bc7a265635f95f168d488f13e4b45dfa6e59c98abd35b316"
+  },
+  "https://www.baseball-reference.com/players/c/chapmar01.shtml": {
+    "bytes": 1138316,
+    "fetched_at": "2026-09-25T14:12:39Z",
+    "path": "players/chapmar01.shtml",
+    "sha256": "5e5d3312f91796b38c4fbccf5ab2f9c7ffa80bb649a03d963805e37ae83fd41f"
+  },
+  "https://www.baseball-reference.com/players/c/chishja01.shtml": {
+    "bytes": 547751,
+    "fetched_at": "2026-09-25T14:12:43Z",
+    "path": "players/chishja01.shtml",
+    "sha256": "192f8eb9ccb105ef4e3ff2f40c36303d6f272770419d7c07552c4717b5e09734"
+  },
+  "https://www.baseball-reference.com/players/c/claseem01.shtml": {
+    "bytes": 516718,
+    "fetched_at": "2026-09-25T14:12:47Z",
+    "path": "players/claseem01.shtml",
+    "sha256": "7089d965238d5d022110daf062121992ed27b9ef1988569eea70518f8529146e"
+  },
+  "https://www.baseball-reference.com/players/c/clemeer01.shtml": {
+    "bytes": 590524,
+    "fetched_at": "2026-09-25T14:12:51Z",
+    "path": "players/clemeer01.shtml",
+    "sha256": "a5a659decc4b04fabb61e399238d2c8e82afb80a5f79a8caef8ee2362eedfdd3"
+  },
+  "https://www.baseball-reference.com/players/c/contrwi01.shtml": {
+    "bytes": 648498,
+    "fetched_at": "2026-09-25T14:12:55Z",
+    "path": "players/contrwi01.shtml",
+    "sha256": "91d1bbfab6c033884e385585bf3c1b21368b69d3f2edc5baef6aff8799b592e1"
+  },
+  "https://www.baseball-reference.com/players/c/contrwi02.shtml": {
+    "bytes": 514181,
+    "fetched_at": "2026-09-25T14:12:59Z",
+    "path": "players/contrwi02.shtml",
+    "sha256": "589c4fcabf59d0c5d69b7fc15165e488764647a97df18743654dc53299a22c27"
+  },
+  "https://www.baseball-reference.com/players/c/correca01.shtml": {
+    "bytes": 650025,
+    "fetched_at": "2026-09-25T14:13:04Z",
+    "path": "players/correca01.shtml",
+    "sha256": "075dce149dfc0db069d8bd405c910a82213bf2620146b101bb9594bfc6d4a7bf"
+  },
+  "https://www.baseball-reference.com/players/c/crochga01.shtml": {
+    "bytes": 535224,
+    "fetched_at": "2026-09-25T14:13:07Z",
+    "path": "players/crochga01.shtml",
+    "sha256": "e4166044c9f8a9abc2290174a86c1fe9cacbf1e943a94df165d5840be062da2b"
+  },
+  "https://www.baseball-reference.com/players/c/crowape01.shtml": {
+    "bytes": 449161,
+    "fetched_at": "2026-09-25T14:13:11Z",
+    "path": "players/crowape01.shtml",
+    "sha256": "9d14199e69d8c703ecaccb87b3621f0db878e8c47d9398c89c78e808cb88c7fa"
+  },
+  "https://www.baseball-reference.com/players/d/degroja01.shtml": {
+    "bytes": 765423,
+    "fetched_at": "2026-09-25T14:13:15Z",
+    "path": "players/degroja01.shtml",
+    "sha256": "b011f0735eb9edbe0a79207b4ee78bd9b39dfbc77d1d0ee86d0f76239082ada9"
+  },
+  "https://www.baseball-reference.com/players/d/delacel01.shtml": {
+    "bytes": 400038,
+    "fetched_at": "2026-09-25T14:13:19Z",
+    "path": "players/delacel01.shtml",
+    "sha256": "27ee6134bcc85a4c48bd68301d96db56ad2ab94c559df1efdd8860550c486c5d"
+  },
+  "https://www.baseball-reference.com/players/d/deverra01.shtml": {
+    "bytes": 607749,
+    "fetched_at": "2026-09-25T14:13:23Z",
+    "path": "players/deverra01.shtml",
+    "sha256": "8789c58491e71bbe602cde152817742b503b7130360e26982e04fd5d3bc203a3"
+  },
+  "https://www.baseball-reference.com/players/d/diazed04.shtml": {
+    "bytes": 665422,
+    "fetched_at": "2026-09-25T14:13:28Z",
+    "path": "players/diazed04.shtml",
+    "sha256": "e11cd8a7cdc3c5d5137d0d57b18a8ec8a35734a3d58fd762832149fb54842da9"
+  },
+  "https://www.baseball-reference.com/players/d/diazya01.shtml": {
+    "bytes": 590815,
+    "fetched_at": "2026-09-25T14:13:32Z",
+    "path": "players/diazya01.shtml",
+    "sha256": "f2558870aca5ba14f4aa8f23de750c6f9a84819516bd663ee1456d99419bcb10"
+  },
+  "https://www.baseball-reference.com/players/d/dingldi01.shtml": {
+    "bytes": 360495,
+    "fetched_at": "2026-09-25T14:13:36Z",
+    "path": "players/dingldi01.shtml",
+    "sha256": "b54d32ea39b16f4bb1199aedb36f5658dd9dbc13c1d32cc50a1b91ed4473f666"
+  },
+  "https://www.baseball-reference.com/players/d/donovbr01.shtml": {
+    "bytes": 456106,
+    "fetched_at": "2026-09-25T14:13:40Z",
+    "path": "players/donovbr01.shtml",
+    "sha256": "8c00e29f904a9f0fa47597f64695175ac7ac34c3c35338bca947981ff69ba37b"
+  },
+  "https://www.baseball-reference.com/players/d/duranja01.shtml": {
+    "bytes": 446915,
+    "fetched_at": "2026-09-25T14:13:44Z",
+    "path": "players/duranja01.shtml",
+    "sha256": "ac9c4642beea1d9fd87f6580511f25c1fd03de2efe52d1993ac0c56cfc9fc6e7"
+  },
+  "https://www.baseball-reference.com/players/d/duranjh01.shtml": {
+    "bytes": 563450,
+    "fetched_at": "2026-09-25T14:13:48Z",
+    "path": "players/duranjh01.shtml",
+    "sha256": "4ee42546cd1c8a9abea7f55edb35d605f2da6681602ca3f0420050649a90edee"
+  },
+  "https://www.baseball-reference.com/players/e/estevca01.shtml": {
+    "bytes": 623099,
+    "fetched_at": "2026-09-25T14:13:52Z",
+    "path": "players/estevca01.shtml",
+    "sha256": "21e86c9a7a557e96b20e9569ffe215071309d07f622b7683df0caf7d1f6da8e3"
+  },
+  "https://www.baseball-reference.com/players/f/finneky01.shtml": {
+    "bytes": 520752,
+    "fetched_at": "2026-09-25T14:13:56Z",
+    "path": "players/finneky01.shtml",
+    "sha256": "69f6f30c1d49fd1bbb869793f97ae5bb07c5a15cf1b90c8ea2735570d5299b3d"
+  },
+  "https://www.baseball-reference.com/players/f/freemfr01.shtml": {
+    "bytes": 772030,
+    "fetched_at": "2026-09-25T14:14:00Z",
+    "path": "players/freemfr01.shtml",
+    "sha256": "261d02420c7e6a306d0d76e937416db97e9a71ad3bc4b6e66b6214e353793f3f"
+  },
+  "https://www.baseball-reference.com/players/f/friedma01.shtml": {
+    "bytes": 777976,
+    "fetched_at": "2026-09-25T14:14:04Z",
+    "path": "players/friedma01.shtml",
+    "sha256": "afc06937955fe0b75f4ef39f3aee16544d8bce56825a98159904ce7f4550a734"
+  },
+  "https://www.baseball-reference.com/players/f/fryda01.shtml": {
+    "bytes": 469335,
+    "fetched_at": "2026-09-25T14:14:08Z",
+    "path": "players/fryda01.shtml",
+    "sha256": "324eb6bec7782f0e6c6f9665e911af7df08f83147b66d228b7ea235f49ad98e4"
+  },
+  "https://www.baseball-reference.com/players/g/garcima01.shtml": {
+    "bytes": 429568,
+    "fetched_at": "2026-09-25T14:14:12Z",
+    "path": "players/garcima01.shtml",
+    "sha256": "f9170a8ff622afc3b4f1b760cf4d776b3971271addd9d97a351cc0681ed1addd"
+  },
+  "https://www.baseball-reference.com/players/g/gilbelo01.shtml": {
+    "bytes": 469707,
+    "fetched_at": "2026-09-25T14:14:16Z",
+    "path": "players/gilbelo01.shtml",
+    "sha256": "e69df656948f3d74579970446a18235d83a1a7436cae74018d4f493db50cf423"
+  },
+  "https://www.baseball-reference.com/players/g/glasnty01.shtml": {
+    "bytes": 767510,
+    "fetched_at": "2026-09-25T14:14:20Z",
+    "path": "players/glasnty01.shtml",
+    "sha256": "79d506e94cbe81fb81362b89ebedc51dfd0cd4e70feb51e241d62808ede7152f"
+  },
+  "https://www.baseball-reference.com/players/g/goodmhu01.shtml": {
+    "bytes": 340419,
+    "fetched_at": "2026-09-25T14:14:24Z",
+    "path": "players/goodmhu01.shtml",
+    "sha256": "6ae4b95785243f6daee629727dcbe4b752fcd5575a77080f3a15914b3cd8033e"
+  },
+  "https://www.baseball-reference.com/players/g/gorema01.shtml": {
+    "bytes": 367874,
+    "fetched_at": "2026-09-25T14:14:28Z",
+    "path": "players/gorema01.shtml",
+    "sha256": "7d0b3ef15a314a6e013298ffca22414e8cdf7d2e03f5076f3b3f18ad9fb5f705"
+  },
+  "https://www.baseball-reference.com/players/g/greenhu01.shtml": {
+    "bytes": 408936,
+    "fetched_at": "2026-09-25T14:14:32Z",
+    "path": "players/greenhu01.shtml",
+    "sha256": "ada94934a752a8453ea00404088188396f2630ab18fa746470aa6cf28bb6e5d7"
+  },
+  "https://www.baseball-reference.com/players/g/greenri03.shtml": {
+    "bytes": 441920,
+    "fetched_at": "2026-09-25T14:14:36Z",
+    "path": "players/greenri03.shtml",
+    "sha256": "b2a6342b50401f38251f4024c39ce3265f11f9d4aca0a56c03701cfb60e0d288"
+  },
+  "https://www.baseball-reference.com/players/g/grifffo01.shtml": {
+    "bytes": 365406,
+    "fetched_at": "2026-09-25T14:14:40Z",
+    "path": "players/grifffo01.shtml",
+    "sha256": "0c45ff14e736111d36a60a43d25629f8ef6324c8d6570b57f85610457a3527f3"
+  },
+  "https://www.baseball-reference.com/players/g/guerrvl02.shtml": {
+    "bytes": 553474,
+    "fetched_at": "2026-09-25T14:14:44Z",
+    "path": "players/guerrvl02.shtml",
+    "sha256": "d2f518ccd20b3fc5216b43b367070c7d36c67b472b882ba98a49e6e26ead39e2"
+  },
+  "https://www.baseball-reference.com/players/h/haderjo01.shtml": {
+    "bytes": 793126,
+    "fetched_at": "2026-09-25T14:14:48Z",
+    "path": "players/haderjo01.shtml",
+    "sha256": "2143183029005e06586eae35d183b001bd64167518f63d3a390614637e8ef33a"
+  },
+  "https://www.baseball-reference.com/players/h/harpebr03.shtml": {
+    "bytes": 793898,
+    "fetched_at": "2026-09-25T14:14:52Z",
+    "path": "players/harpebr03.shtml",
+    "sha256": "763138b157d6c9b9fe9f463b73a2a66421b48dfab106b9dd35d28aa54ef4d11a"
+  },
+  "https://www.baseball-reference.com/players/h/helslry01.shtml": {
+    "bytes": 619630,
+    "fetched_at": "2026-09-25T14:14:56Z",
+    "path": "players/helslry01.shtml",
+    "sha256": "53ea2077f6c1fc71ea86eac6e0db6b5c4581c12d08070994791337ab0485a878"
+  },
+  "https://www.baseball-reference.com/players/h/hendegu01.shtml": {
+    "bytes": 440109,
+    "fetched_at": "2026-09-25T14:15:00Z",
+    "path": "players/hendegu01.shtml",
+    "sha256": "66b15747126bcb691c27426ea28395e43df3b5ed273cf29967d6d3e11456ca12"
+  },
+  "https://www.baseball-reference.com/players/h/hernate01.shtml": {
+    "bytes": 667780,
+    "fetched_at": "2026-09-25T14:15:04Z",
+    "path": "players/hernate01.shtml",
+    "sha256": "08c7d5487edfc6b66c5f525ca6d837ad051154d11f5ba823dbd805fd4b7a078b"
+  },
+  "https://www.baseball-reference.com/players/h/herreiv01.shtml": {
+    "bytes": 337234,
+    "fetched_at": "2026-09-25T14:15:08Z",
+    "path": "players/herreiv01.shtml",
+    "sha256": "149ca0a4ffac1c450befa05f016c7d7401ae07f28ea678087b8e463b2f28ae32"
+  },
+  "https://www.baseball-reference.com/players/h/hoffmje02.shtml": {
+    "bytes": 746855,
+    "fetched_at": "2026-09-25T14:15:12Z",
+    "path": "players/hoffmje02.shtml",
+    "sha256": "442269a3522b2ddece7eee3b7266f3e8903df0934b960cea0589ebc7b20b7e14"
+  },
+  "https://www.baseball-reference.com/players/h/holmecl01.shtml": {
+    "bytes": 702382,
+    "fetched_at": "2026-09-25T14:15:16Z",
+    "path": "players/holmecl01.shtml",
+    "sha256": "e14082abef65f7b0c2f0e9db5bb50dfd19feec59ad74edf56cd53d9609dc831f"
+  },
+  "https://www.baseball-reference.com/players/h/houckta01.shtml": {
+    "bytes": 458314,
+    "fetched_at": "2026-09-25T14:15:20Z",
+    "path": "players/houckta01.shtml",
+    "sha256": "23d478398825361a6b12defd3835e6b46b012b9206cc8f3f0634e32e612b8be5"
+  },
+  "https://www.baseball-reference.com/players/i/iglesra01.shtml": {
+    "bytes": 715451,
+    "fetched_at": "2026-09-25T14:15:24Z",
+    "path": "players/iglesra01.shtml",
+    "sha256": "8d84de6493f7f6777f412d34148cbfbd984dc85136633a11c64d613b7dc0b4a7"
+  },
+  "https://www.baseball-reference.com/players/i/imanash01.shtml": {
+    "bytes": 407922,
+    "fetched_at": "2026-09-25T14:15:28Z",
+    "path": "players/imanash01.shtml",
+    "sha256": "9d174feb0b1d40b88c91c921adc4937c439fccb229e286ffc87525d8c42922b4"
+  },
   "https://www.baseball-reference.com/players/j/judgeaa01.shtml": {
     "bytes": 704040,
     "fetched_at": "2026-09-25T04:24:20Z",
     "path": "players/judgeaa01.shtml",
     "sha256": "8521e85e3d02a6793156daa68cfa2db62ac6d97d97adbd2279ad6ba7183a897f"
+  },
+  "https://www.baseball-reference.com/players/k/kershcl01.shtml": {
+    "bytes": 1042521,
+    "fetched_at": "2026-09-25T14:15:32Z",
+    "path": "players/kershcl01.shtml",
+    "sha256": "cd11a13c48f1b126fd8b0157ebdd62fff531dfbcc0b5dc3c334022a88717d9c3"
+  },
+  "https://www.baseball-reference.com/players/k/kikucyu01.shtml": {
+    "bytes": 548575,
+    "fetched_at": "2026-09-25T14:15:36Z",
+    "path": "players/kikucyu01.shtml",
+    "sha256": "e4a6737ad1546534ae5800af382b2e3ad9559488e4b8db9d1d2364d9ca5a0940"
+  },
+  "https://www.baseball-reference.com/players/k/kirkal01.shtml": {
+    "bytes": 484229,
+    "fetched_at": "2026-09-25T14:15:40Z",
+    "path": "players/kirkal01.shtml",
+    "sha256": "5e9291118cf776b40df41204831fd6240c853dcf7af1f4b67e3224c53f99f88b"
+  },
+  "https://www.baseball-reference.com/players/k/kurtzni01.shtml": {
+    "bytes": 289026,
+    "fetched_at": "2026-09-25T14:15:44Z",
+    "path": "players/kurtzni01.shtml",
+    "sha256": "e145d1a68b14eb6247b4fcf067816181410069354b31f82dec1e083405d6ec6f"
+  },
+  "https://www.baseball-reference.com/players/k/kwanst01.shtml": {
+    "bytes": 463066,
+    "fetched_at": "2026-09-25T14:15:48Z",
+    "path": "players/kwanst01.shtml",
+    "sha256": "05bc3b71740eab9ef4f7ef819e3341120587d72cd14a0e96c51cdae2c9b960e0"
+  },
+  "https://www.baseball-reference.com/players/l/langesh01.shtml": {
+    "bytes": 345859,
+    "fetched_at": "2026-09-25T14:15:52Z",
+    "path": "players/langesh01.shtml",
+    "sha256": "a98bcf8471f06dd0e5ffc65da7eef0e9a10f35b9f867036d6f6682f6729801c7"
+  },
+  "https://www.baseball-reference.com/players/l/latzja01.shtml": {
+    "bytes": 367949,
+    "fetched_at": "2026-09-25T14:15:56Z",
+    "path": "players/latzja01.shtml",
+    "sha256": "a0c4e6debcf37779359fc0be96aec2fecf3cfadcb9804b792dce2f3bcd3cad7b"
+  },
+  "https://www.baseball-reference.com/players/l/lindofr01.shtml": {
+    "bytes": 688167,
+    "fetched_at": "2026-09-25T14:16:00Z",
+    "path": "players/lindofr01.shtml",
+    "sha256": "b9d2158f29f34ff598f0d6509b06c688700e5c3421543115548e020e5cc40b06"
+  },
+  "https://www.baseball-reference.com/players/l/lopezot01.shtml": {
+    "bytes": 381843,
+    "fetched_at": "2026-09-25T14:16:04Z",
+    "path": "players/lopezot01.shtml",
+    "sha256": "2af23c8a2345c823dafb2ee2e39828cd3c7a793e535c00bbc64b65be069dd20a"
+  },
+  "https://www.baseball-reference.com/players/l/lopezre01.shtml": {
+    "bytes": 711395,
+    "fetched_at": "2026-09-25T14:16:08Z",
+    "path": "players/lopezre01.shtml",
+    "sha256": "1116ff2160fc95688cb82256d977b6718b4fe1416583334c51e25157fafcfee8"
+  },
+  "https://www.baseball-reference.com/players/l/lowebr01.shtml": {
+    "bytes": 579349,
+    "fetched_at": "2026-09-25T14:16:12Z",
+    "path": "players/lowebr01.shtml",
+    "sha256": "bfbbd8eaa88c464bf42e99dad2bd0ebf695138840f5311f9c7ff3c62b32a6bcf"
+  },
+  "https://www.baseball-reference.com/players/l/lugose01.shtml": {
+    "bytes": 674221,
+    "fetched_at": "2026-09-25T14:16:16Z",
+    "path": "players/lugose01.shtml",
+    "sha256": "358b8ac59897919a0dc072c8cb46e60edd5ccda401f7bcc89dd40d5001a7cf55"
+  },
+  "https://www.baseball-reference.com/players/l/luzarje01.shtml": {
+    "bytes": 694789,
+    "fetched_at": "2026-09-25T14:16:20Z",
+    "path": "players/luzarje01.shtml",
+    "sha256": "6b743628df4e49a84fb61530e06d008be8acdf71ab26d8100f2a5c72f56706cd"
+  },
+  "https://www.baseball-reference.com/players/m/machama01.shtml": {
+    "bytes": 774950,
+    "fetched_at": "2026-09-25T14:16:24Z",
+    "path": "players/machama01.shtml",
+    "sha256": "e7d939c5b7ba0655736b7a76535daf2fdd146903d6e02cc64f0f49f4a478fc74"
+  },
+  "https://www.baseball-reference.com/players/m/marshbr02.shtml": {
+    "bytes": 524694,
+    "fetched_at": "2026-09-25T14:16:28Z",
+    "path": "players/marshbr02.shtml",
+    "sha256": "f20e0400cb520f418ecdab257c37255cd67d38d0507608b2b2d19489e2d7ae45"
+  },
+  "https://www.baseball-reference.com/players/m/marteke01.shtml": {
+    "bytes": 616785,
+    "fetched_at": "2026-09-25T14:16:32Z",
+    "path": "players/marteke01.shtml",
+    "sha256": "aa9e5189289b1b4624cf7bdcb5666ef9bc02cb96dd2cc2d4f73b0f05b21d3787"
+  },
+  "https://www.baseball-reference.com/players/m/martini01.shtml": {
+    "bytes": 640230,
+    "fetched_at": "2026-09-25T14:16:36Z",
+    "path": "players/martini01.shtml",
+    "sha256": "7fc9fb1942879d01f28713a687cda5943db3707cb77cf002bab89ff966658350"
+  },
+  "https://www.baseball-reference.com/players/m/mcgonke01.shtml": {
+    "bytes": 293359,
+    "fetched_at": "2026-09-25T14:16:40Z",
+    "path": "players/mcgonke01.shtml",
+    "sha256": "ad6b955ae81eaa4817bebb7c83dab7a108cd25ef78dfbd56f094228b3b37e4b7"
+  },
+  "https://www.baseball-reference.com/players/m/mckinza01.shtml": {
+    "bytes": 642521,
+    "fetched_at": "2026-09-25T14:16:44Z",
+    "path": "players/mckinza01.shtml",
+    "sha256": "350222ed44937373b9a51a5599b2245f73129542ec2b4c975978c6454c69eac5"
+  },
+  "https://www.baseball-reference.com/players/m/mcmahry01.shtml": {
+    "bytes": 574105,
+    "fetched_at": "2026-09-25T14:16:48Z",
+    "path": "players/mcmahry01.shtml",
+    "sha256": "24dcb55f01c7d15395756a171b6301cfc1f4dbabb35801444b806c02b69e0f81"
+  },
+  "https://www.baseball-reference.com/players/m/megiltr01.shtml": {
+    "bytes": 536989,
+    "fetched_at": "2026-09-25T14:16:52Z",
+    "path": "players/megiltr01.shtml",
+    "sha256": "fa3063a92cc3e7207ad40806ae2ea2080c7006d546cda9d0e85876ffe7d7e095"
+  },
+  "https://www.baseball-reference.com/players/m/merrija01.shtml": {
+    "bytes": 393483,
+    "fetched_at": "2026-09-25T14:16:56Z",
+    "path": "players/merrija01.shtml",
+    "sha256": "123df2fa8860e80c6e175fea353e3c76a254961a1e378276737024b43b91fcc3"
+  },
+  "https://www.baseball-reference.com/players/m/messipa01.shtml": {
+    "bytes": 281890,
+    "fetched_at": "2026-09-25T14:17:00Z",
+    "path": "players/messipa01.shtml",
+    "sha256": "42fa3525f11ec61647c79ca583d91497527efe3eb542e309593eebb028f6888c"
+  },
+  "https://www.baseball-reference.com/players/m/meyerma01.shtml": {
+    "bytes": 300272,
+    "fetched_at": "2026-09-25T14:17:04Z",
+    "path": "players/meyerma01.shtml",
+    "sha256": "f0fee0577ecd87d6308453e0fab79ad112c6c4b4e2b5f8a41b38e77ce1402dd8"
+  },
+  "https://www.baseball-reference.com/players/m/millema03.shtml": {
+    "bytes": 432676,
+    "fetched_at": "2026-09-25T14:17:08Z",
+    "path": "players/millema03.shtml",
+    "sha256": "a591a959a70d4fa6212a5d21f17aa602947692a62c0aa3717432efc726549b35"
+  },
+  "https://www.baseball-reference.com/players/m/misioja01.shtml": {
+    "bytes": 389264,
+    "fetched_at": "2026-09-25T14:17:12Z",
+    "path": "players/misioja01.shtml",
+    "sha256": "a0b552efa1f284ab8416d1a844d2c4152996a80d1849fb5a33d252c47a7e2a1c"
+  },
+  "https://www.baseball-reference.com/players/m/mizeca01.shtml": {
+    "bytes": 523392,
+    "fetched_at": "2026-09-25T14:17:16Z",
+    "path": "players/mizeca01.shtml",
+    "sha256": "d8a6fb3ae0462e570b2ab5004002144c13aa81b16f2b652bce14197b9383edc6"
+  },
+  "https://www.baseball-reference.com/players/m/morejad01.shtml": {
+    "bytes": 572554,
+    "fetched_at": "2026-09-25T14:17:20Z",
+    "path": "players/morejad01.shtml",
+    "sha256": "57e2c639f59e5a17113ab34afe1dcbe33aef86b8f100f894606049c497d7705c"
+  },
+  "https://www.baseball-reference.com/players/m/muncyma01.shtml": {
+    "bytes": 650744,
+    "fetched_at": "2026-09-25T14:17:24Z",
+    "path": "players/muncyma01.shtml",
+    "sha256": "af3493a69510ac31ce5467436e086fddc28413702bd464551895d06eedb35b04"
+  },
+  "https://www.baseball-reference.com/players/m/munozan01.shtml": {
+    "bytes": 545399,
+    "fetched_at": "2026-09-25T14:17:28Z",
+    "path": "players/munozan01.shtml",
+    "sha256": "b548b38a7982473d0bc70521dbefe4c604ead77057ba2dc7c533344a99909a0b"
+  },
+  "https://www.baseball-reference.com/players/m/murakmu01.shtml": {
+    "bytes": 270008,
+    "fetched_at": "2026-09-25T14:17:32Z",
+    "path": "players/murakmu01.shtml",
+    "sha256": "139055f19d5e0288c7125f2518ca809932cb77578ae3e3ebb3f252b64eed3f33"
+  },
+  "https://www.baseball-reference.com/players/n/naylojo01.shtml": {
+    "bytes": 602717,
+    "fetched_at": "2026-09-25T14:17:36Z",
+    "path": "players/naylojo01.shtml",
+    "sha256": "15cac9c0695fcb9b6e8328ca53972f1ca30815728caacbdf793aa2f3948a41de"
+  },
+  "https://www.baseball-reference.com/players/o/obrieri01.shtml": {
+    "bytes": 376826,
+    "fetched_at": "2026-09-25T14:17:40Z",
+    "path": "players/obrieri01.shtml",
+    "sha256": "f7d091d0d97eb60dab2e40eb46aa239e870d85ce5359398281a340df6977f225"
+  },
+  "https://www.baseball-reference.com/players/o/ohearry01.shtml": {
+    "bytes": 566503,
+    "fetched_at": "2026-09-25T14:17:44Z",
+    "path": "players/ohearry01.shtml",
+    "sha256": "a2b77a807d0d8e8c9770d19eb0eb2424b425cd0d4fdfa12e667d360dd27b6167"
+  },
+  "https://www.baseball-reference.com/players/o/ohtansh01.shtml": {
+    "bytes": 821330,
+    "fetched_at": "2026-09-25T14:17:48Z",
+    "path": "players/ohtansh01.shtml",
+    "sha256": "cd68ca764e7da0ce7f1fe1285caca0ce3c3945916c57bacec5bc1b6492c311ab"
+  },
+  "https://www.baseball-reference.com/players/o/olsonma02.shtml": {
+    "bytes": 617105,
+    "fetched_at": "2026-09-25T14:17:52Z",
+    "path": "players/olsonma02.shtml",
+    "sha256": "01631da6cbaa98eee374198891545a271cf907eb47a09cfe7f001f6062cfe1ca"
+  },
+  "https://www.baseball-reference.com/players/o/ozunama01.shtml": {
+    "bytes": 666584,
+    "fetched_at": "2026-09-25T14:17:56Z",
+    "path": "players/ozunama01.shtml",
+    "sha256": "6a1825803e0f8f1855bffe524bea0bf6132be7f7ffd99318588fdfb34319c1d6"
+  },
+  "https://www.baseball-reference.com/players/p/pagesan01.shtml": {
+    "bytes": 417106,
+    "fetched_at": "2026-09-25T14:18:00Z",
+    "path": "players/pagesan01.shtml",
+    "sha256": "27a868c20741e2544e4358dff11e798a54d4fbe5c19e1e7845cb60777cb55c12"
+  },
+  "https://www.baseball-reference.com/players/p/paredis01.shtml": {
+    "bytes": 502905,
+    "fetched_at": "2026-09-25T14:18:04Z",
+    "path": "players/paredis01.shtml",
+    "sha256": "0f8d39eec4f440fa4548e102b71833619ebe35c339ba1dc6d8b259bc2b7aa5a7"
+  },
+  "https://www.baseball-reference.com/players/p/penaje02.shtml": {
+    "bytes": 437241,
+    "fetched_at": "2026-09-25T14:18:08Z",
+    "path": "players/penaje02.shtml",
+    "sha256": "3e67ec743cd0f28b241837598db32f5811f3530ccd795873e402b8bb262c2c5c"
+  },
+  "https://www.baseball-reference.com/players/p/peralfr01.shtml": {
+    "bytes": 706198,
+    "fetched_at": "2026-09-25T14:18:12Z",
+    "path": "players/peralfr01.shtml",
+    "sha256": "82c2554a445bf9091072fe7bf70627454f22c111e3681328beaf85cac3339c51"
+  },
+  "https://www.baseball-reference.com/players/p/perezsa02.shtml": {
+    "bytes": 649327,
+    "fetched_at": "2026-09-25T14:18:16Z",
+    "path": "players/perezsa02.shtml",
+    "sha256": "b02715d9296d118307ab515f05afeb3ba110d078f97caf5ce9d0ba4607f638df"
+  },
+  "https://www.baseball-reference.com/players/p/peterda01.shtml": {
+    "bytes": 568451,
+    "fetched_at": "2026-09-25T14:18:20Z",
+    "path": "players/peterda01.shtml",
+    "sha256": "28f87b313ce5a84d80d471d795edc33669ab0818ad65d6af83e566451343f810"
+  },
+  "https://www.baseball-reference.com/players/p/petertr01.shtml": {
+    "bytes": 299365,
+    "fetched_at": "2026-09-25T14:18:24Z",
+    "path": "players/petertr01.shtml",
+    "sha256": "0142d12536e91d3330b2046e5edd4741e3e9a6c644ec9f564b4e52dcf050378c"
+  },
+  "https://www.baseball-reference.com/players/p/profaju01.shtml": {
+    "bytes": 716673,
+    "fetched_at": "2026-09-25T14:18:28Z",
+    "path": "players/profaju01.shtml",
+    "sha256": "26e1817d16e00b25b8ec64be578ac6074b1c2249522ff2e1e091b77ad56d0972"
+  },
+  "https://www.baseball-reference.com/players/r/rafaece01.shtml": {
+    "bytes": 405176,
+    "fetched_at": "2026-09-25T14:18:32Z",
+    "path": "players/rafaece01.shtml",
+    "sha256": "82f0d3ea6bbf97d5950d4794430d1c5d1090c4a96e9a4ef5cd2cac770ad505ef"
+  },
+  "https://www.baseball-reference.com/players/r/raganco01.shtml": {
+    "bytes": 487251,
+    "fetched_at": "2026-09-25T14:18:36Z",
+    "path": "players/raganco01.shtml",
+    "sha256": "1d038f25c9c4d67538490c89e506424436e274481aaf92f4a5074c048ee748ae"
+  },
+  "https://www.baseball-reference.com/players/r/raleica01.shtml": {
+    "bytes": 456572,
+    "fetched_at": "2026-09-25T14:18:40Z",
+    "path": "players/raleica01.shtml",
+    "sha256": "7ba0f1ac1c304cc19d1bfadbb337ef728010934afe33e0ec6c6f2bdc53a09501"
+  },
+  "https://www.baseball-reference.com/players/r/ramirjo01.shtml": {
+    "bytes": 709797,
+    "fetched_at": "2026-09-25T14:18:44Z",
+    "path": "players/ramirjo01.shtml",
+    "sha256": "980d38506725798dfc5cc7ba92f2bf43bf49df477735386ee18545c27379d266"
+  },
+  "https://www.baseball-reference.com/players/r/ramoshe02.shtml": {
+    "bytes": 415803,
+    "fetched_at": "2026-09-25T14:18:48Z",
+    "path": "players/ramoshe02.shtml",
+    "sha256": "921df13a5d93f194d209ddd6a1445f0f3ba272357a221dc6765e07b42e6989d1"
+  },
+  "https://www.baseball-reference.com/players/r/rasmudr01.shtml": {
+    "bytes": 617670,
+    "fetched_at": "2026-09-25T14:18:52Z",
+    "path": "players/rasmudr01.shtml",
+    "sha256": "9ff77a9bd25dcb98035ede59a2a7ff4af6030eca8cb65afa47cfcfb41c27aea7"
+  },
+  "https://www.baseball-reference.com/players/r/rayro02.shtml": {
+    "bytes": 842359,
+    "fetched_at": "2026-09-25T14:18:56Z",
+    "path": "players/rayro02.shtml",
+    "sha256": "6c3b68ee95d0cb82640e75bab2bc14dec14c77173a80f4468a6f59bd72bf7e04"
+  },
+  "https://www.baseball-reference.com/players/r/reynobr01.shtml": {
+    "bytes": 450719,
+    "fetched_at": "2026-09-25T14:19:00Z",
+    "path": "players/reynobr01.shtml",
+    "sha256": "8850fe96e0b676a79159213b836392c8a5d32424b35b9ef4c86a0a568370479e"
+  },
+  "https://www.baseball-reference.com/players/r/ricebe01.shtml": {
+    "bytes": 385192,
+    "fetched_at": "2026-09-25T14:19:04Z",
+    "path": "players/ricebe01.shtml",
+    "sha256": "acb72afed88ae57d6ef9ca3e688e50abb3c33a1c41178b9441d4796103ea7d12"
+  },
+  "https://www.baseball-reference.com/players/r/rodonca01.shtml": {
+    "bytes": 725319,
+    "fetched_at": "2026-09-25T14:19:08Z",
+    "path": "players/rodonca01.shtml",
+    "sha256": "8baaaf10f1553a360dc130e27928215006f1aeeb73c745ee6b37d1c36f57fb46"
+  },
+  "https://www.baseball-reference.com/players/r/rodried05.shtml": {
+    "bytes": 694184,
+    "fetched_at": "2026-09-25T14:19:12Z",
+    "path": "players/rodried05.shtml",
+    "sha256": "50f158866179a6409f8c9af178e85096cdc8ed19a8eb8755c871dab36f070faf"
+  },
+  "https://www.baseball-reference.com/players/r/rodriju01.shtml": {
+    "bytes": 465983,
+    "fetched_at": "2026-09-25T14:19:16Z",
+    "path": "players/rodriju01.shtml",
+    "sha256": "aadb88b37789df03f6cfdc91d9a5249814d672a5811262c38896e9c57d2d95a9"
+  },
+  "https://www.baseball-reference.com/players/r/rodrira02.shtml": {
+    "bytes": 254388,
+    "fetched_at": "2026-09-25T14:19:20Z",
+    "path": "players/rodrira02.shtml",
+    "sha256": "a58df4b764e215e0a30f2bbb7307c3e45f0a605b73b3245ae2858ad77d048e3a"
+  },
+  "https://www.baseball-reference.com/players/r/rookebr01.shtml": {
+    "bytes": 459049,
+    "fetched_at": "2026-09-25T14:19:24Z",
+    "path": "players/rookebr01.shtml",
+    "sha256": "36d0418f95bfc6feb43855112b8c506346d29e03758faf5dbadd5e71a5c9bf90"
+  },
+  "https://www.baseball-reference.com/players/r/rutscad01.shtml": {
+    "bytes": 457336,
+    "fetched_at": "2026-09-25T14:19:28Z",
+    "path": "players/rutscad01.shtml",
+    "sha256": "334a207aefb73e76afe407f76c01bb631a2f4425bc502e64c1fe0b8eed4f2bea"
+  },
+  "https://www.baseball-reference.com/players/r/ryanjo04.shtml": {
+    "bytes": 467544,
+    "fetched_at": "2026-09-25T14:19:32Z",
+    "path": "players/ryanjo04.shtml",
+    "sha256": "c85e9286285b754a8b11330d5f93b15031cd299da4632973a83ba30b00500359"
+  },
+  "https://www.baseball-reference.com/players/s/salech01.shtml": {
+    "bytes": 820410,
+    "fetched_at": "2026-09-25T14:19:36Z",
+    "path": "players/salech01.shtml",
+    "sha256": "e9f38a564dc5695a07d5eb331bf209c9dee4651626b278eaa6a1059c54ff6d8a"
+  },
+  "https://www.baseball-reference.com/players/s/sanchcr01.shtml": {
+    "bytes": 508419,
+    "fetched_at": "2026-09-25T14:19:40Z",
+    "path": "players/sanchcr01.shtml",
+    "sha256": "e108e92f9c448fdc72091f75961673277710811fe15a2a5f32b006cf4d3b027c"
+  },
+  "https://www.baseball-reference.com/players/s/santaan02.shtml": {
+    "bytes": 528897,
+    "fetched_at": "2026-09-25T14:19:44Z",
+    "path": "players/santaan02.shtml",
+    "sha256": "f7404884953bd15088f80f67a8371c08bf9f4fdca4358a7e5e91f452f4d8a1bf"
+  },
+  "https://www.baseball-reference.com/players/s/schlica01.shtml": {
+    "bytes": 382423,
+    "fetched_at": "2026-09-25T14:19:48Z",
+    "path": "players/schlica01.shtml",
+    "sha256": "2f0baea3d067304efca95ae684012d8811bfc79efccb48927c1dae1f539d22f4"
+  },
+  "https://www.baseball-reference.com/players/s/schwaky01.shtml": {
+    "bytes": 789116,
+    "fetched_at": "2026-09-25T14:19:52Z",
+    "path": "players/schwaky01.shtml",
+    "sha256": "5a0b90647c552dda25ea6d0948bc4179340505b432eb0df2483693559a9bb59a"
+  },
+  "https://www.baseball-reference.com/players/s/scottta01.shtml": {
+    "bytes": 626644,
+    "fetched_at": "2026-09-25T14:19:56Z",
+    "path": "players/scottta01.shtml",
+    "sha256": "182dfd99860d904134a4d241ef2d5f516fe6d1dd5bc3146581b5afdbe23d7021"
+  },
+  "https://www.baseball-reference.com/players/s/seageco01.shtml": {
+    "bytes": 675902,
+    "fetched_at": "2026-09-25T14:20:00Z",
+    "path": "players/seageco01.shtml",
+    "sha256": "083bef4a8c27b28d5c0de3b81d91e17ca92a11f492589ae83035bac87f3ce4c7"
+  },
+  "https://www.baseball-reference.com/players/s/semiema01.shtml": {
+    "bytes": 678948,
+    "fetched_at": "2026-09-25T14:20:04Z",
+    "path": "players/semiema01.shtml",
+    "sha256": "c6e7faa065b46583e907f0f0c93af195e5301a3de44136936fbb9d7b97d572dd"
+  },
+  "https://www.baseball-reference.com/players/s/skenepa01.shtml": {
+    "bytes": 317417,
+    "fetched_at": "2026-09-25T14:20:08Z",
+    "path": "players/skenepa01.shtml",
+    "sha256": "ada3236278957584f3ceee7220e192343d18bedd77b44cfd545794bc6588227a"
+  },
+  "https://www.baseball-reference.com/players/s/skubata01.shtml": {
+    "bytes": 581970,
+    "fetched_at": "2026-09-25T14:20:12Z",
+    "path": "players/skubata01.shtml",
+    "sha256": "a667f9a48d294bc5d58bdecb929871d43f64fb64f59307468bebf0d8cf2d6a7c"
+  },
+  "https://www.baseball-reference.com/players/s/smithca06.shtml": {
+    "bytes": 443512,
+    "fetched_at": "2026-09-25T14:20:16Z",
+    "path": "players/smithca06.shtml",
+    "sha256": "646416b2b6e5a80b7adb9c6d10379cef8e689ac73f7b33ea81114fbeb2ca774f"
+  },
+  "https://www.baseball-reference.com/players/s/smithsh02.shtml": {
+    "bytes": 250037,
+    "fetched_at": "2026-09-25T14:20:20Z",
+    "path": "players/smithsh02.shtml",
+    "sha256": "514f097026d6ba97b21d7f204d17f3768a587875a7d298bde1e09fcf7b5fad37"
+  },
+  "https://www.baseball-reference.com/players/s/smithwi05.shtml": {
+    "bytes": 536936,
+    "fetched_at": "2026-09-25T14:20:24Z",
+    "path": "players/smithwi05.shtml",
+    "sha256": "37752c86695bcd01cc2055a797a9a13ef1cf3a6b904bcea91ff8b38b91ffb9f7"
+  },
+  "https://www.baseball-reference.com/players/s/sotoju01.shtml": {
+    "bytes": 695643,
+    "fetched_at": "2026-09-25T14:20:28Z",
+    "path": "players/sotoju01.shtml",
+    "sha256": "b67faeec9539647cf85c099b55acc76cddc16ec2a8f109e2107985d4814cd4de"
+  },
+  "https://www.baseball-reference.com/players/s/stewasa02.shtml": {
+    "bytes": 350962,
+    "fetched_at": "2026-09-25T14:20:32Z",
+    "path": "players/stewasa02.shtml",
+    "sha256": "3cfc07e98651e897aaea85c7b92742c7097c93c6818f4c6e23101b83ebbb532a"
+  },
+  "https://www.baseball-reference.com/players/s/stoweky01.shtml": {
+    "bytes": 409753,
+    "fetched_at": "2026-09-25T14:20:36Z",
+    "path": "players/stoweky01.shtml",
+    "sha256": "6be0014b1ff9bae7af250182e3bcf0e1e860a4dd78487a747f8beae82a9bc23b"
+  },
+  "https://www.baseball-reference.com/players/s/strahma01.shtml": {
+    "bytes": 681163,
+    "fetched_at": "2026-09-25T14:20:40Z",
+    "path": "players/strahma01.shtml",
+    "sha256": "81e4a08cf7d57bc2465076c2f346303c5ef0007fbb1a9cfb4c212d74303aa47a"
+  },
+  "https://www.baseball-reference.com/players/s/suareeu01.shtml": {
+    "bytes": 659439,
+    "fetched_at": "2026-09-25T14:20:44Z",
+    "path": "players/suareeu01.shtml",
+    "sha256": "d45406746a8746544ff641ccbf55584edc7646875c31136b4bd5e1fa18e931a8"
+  },
+  "https://www.baseball-reference.com/players/s/suarera01.shtml": {
+    "bytes": 628297,
+    "fetched_at": "2026-09-25T14:20:48Z",
+    "path": "players/suarera01.shtml",
+    "sha256": "760fe7b17652159ab6a1cd1bb054d618e76750a611cb33a924a6da863b0488f8"
+  },
+  "https://www.baseball-reference.com/players/s/suarero01.shtml": {
+    "bytes": 511503,
+    "fetched_at": "2026-09-25T14:20:52Z",
+    "path": "players/suarero01.shtml",
+    "sha256": "4d51230d4e234e098f7e34148356de3cc96c63fa8b0ab2535d4011828dad758b"
+  },
+  "https://www.baseball-reference.com/players/t/tatisfe02.shtml": {
+    "bytes": 538033,
+    "fetched_at": "2026-09-25T14:20:56Z",
+    "path": "players/tatisfe02.shtml",
+    "sha256": "496576e4e8a14fd74cc94ec2815e94951e3242b037430cbc7c45ebdefcb2e69f"
+  },
+  "https://www.baseball-reference.com/players/t/torregl01.shtml": {
+    "bytes": 554877,
+    "fetched_at": "2026-09-25T14:21:00Z",
+    "path": "players/torregl01.shtml",
+    "sha256": "d4760800ab25a81fe9c311ac237b8db0156d6b76a9ce479f5806e8d42193fa1f"
+  },
+  "https://www.baseball-reference.com/players/t/troutmi01.shtml": {
+    "bytes": 694168,
+    "fetched_at": "2026-09-25T14:21:04Z",
+    "path": "players/troutmi01.shtml",
+    "sha256": "0951588481350b17b48e4b8ea5587b3c7806a70c6b44b44e55d4c4136a49b7a3"
+  },
+  "https://www.baseball-reference.com/players/t/tuckeky01.shtml": {
+    "bytes": 653710,
+    "fetched_at": "2026-09-25T14:21:08Z",
+    "path": "players/tuckeky01.shtml",
+    "sha256": "98ecde1f10dc2f3c266008a3d5a19661ef6967537a8c2a2439cf10cde0dfa8e7"
+  },
+  "https://www.baseball-reference.com/players/t/turnetr01.shtml": {
+    "bytes": 688068,
+    "fetched_at": "2026-09-25T14:21:12Z",
+    "path": "players/turnetr01.shtml",
+    "sha256": "47bbf0350cc46db02d2a943d8b8e95e9d9a8bdd3f15a922b72dc75a5927696bd"
+  },
+  "https://www.baseball-reference.com/players/v/vargami01.shtml": {
+    "bytes": 421491,
+    "fetched_at": "2026-09-25T14:21:16Z",
+    "path": "players/vargami01.shtml",
+    "sha256": "cbac5710dd8fa3873bd740593641d983c4807040b2c12693e55ede68a9156343"
+  },
+  "https://www.baseball-reference.com/players/v/varlalo01.shtml": {
+    "bytes": 498770,
+    "fetched_at": "2026-09-25T14:21:20Z",
+    "path": "players/varlalo01.shtml",
+    "sha256": "c857560871c2892b71161ed3cd16b476c74ebbde0ab49d02060d171fd3fa613b"
+  },
+  "https://www.baseball-reference.com/players/v/verlaju01.shtml": {
+    "bytes": 1183767,
+    "fetched_at": "2026-09-25T14:21:24Z",
+    "path": "players/verlaju01.shtml",
+    "sha256": "7702855ae3f9795f4c489143db467b4460244927ce06a4669fef784648a0bec9"
+  },
+  "https://www.baseball-reference.com/players/w/wachami01.shtml": {
+    "bytes": 841343,
+    "fetched_at": "2026-09-25T14:21:28Z",
+    "path": "players/wachami01.shtml",
+    "sha256": "ae10c7b45d48a00d76115578358b42990ff8afc79813129a70192167cb1ac7ae"
+  },
+  "https://www.baseball-reference.com/players/w/walkejo02.shtml": {
+    "bytes": 329833,
+    "fetched_at": "2026-09-25T14:21:32Z",
+    "path": "players/walkejo02.shtml",
+    "sha256": "e68790e2e2af8594036419870e1fa4a739ae110a27cc19df6d168d1470540944"
+  },
+  "https://www.baseball-reference.com/players/w/webblo01.shtml": {
+    "bytes": 540438,
+    "fetched_at": "2026-09-25T14:21:36Z",
+    "path": "players/webblo01.shtml",
+    "sha256": "3dba7ee6ac563dc315fa200485b05cc83903bb4ab7cc45ab8f83b70290b04a37"
+  },
+  "https://www.baseball-reference.com/players/w/westbjo01.shtml": {
+    "bytes": 359502,
+    "fetched_at": "2026-09-25T14:21:40Z",
+    "path": "players/westbjo01.shtml",
+    "sha256": "4376dd2aefd11d043399fec683200dfd61fdeff7601e0c6bf5e8a896f0554e93"
+  },
+  "https://www.baseball-reference.com/players/w/wheelza01.shtml": {
+    "bytes": 726859,
+    "fetched_at": "2026-09-25T14:21:44Z",
+    "path": "players/wheelza01.shtml",
+    "sha256": "8fe5652806dc90234c9485670f2a8378955dd699b2f34a3e98e322afe17350cd"
+  },
+  "https://www.baseball-reference.com/players/w/wilsoja05.shtml": {
+    "bytes": 302896,
+    "fetched_at": "2026-09-25T14:21:48Z",
+    "path": "players/wilsoja05.shtml",
+    "sha256": "36367b6b1196ec7743ee8fde04f686f5ead1c4a523c611c5270be3b0f83edb41"
+  },
+  "https://www.baseball-reference.com/players/w/wittbo02.shtml": {
+    "bytes": 447530,
+    "fetched_at": "2026-09-25T14:21:52Z",
+    "path": "players/wittbo02.shtml",
+    "sha256": "3ddac77eb52d91acc39611be6a4a12d3674f6f683fb4e9804a7c00f0807e2be7"
+  },
+  "https://www.baseball-reference.com/players/w/woobr01.shtml": {
+    "bytes": 395568,
+    "fetched_at": "2026-09-25T14:21:56Z",
+    "path": "players/woobr01.shtml",
+    "sha256": "ee95f3c3acf2f0a3d9adca02fb22997937471fbe0849e1172310618ee2a7c0ee"
+  },
+  "https://www.baseball-reference.com/players/w/woodja03.shtml": {
+    "bytes": 326990,
+    "fetched_at": "2026-09-25T14:22:00Z",
+    "path": "players/woodja03.shtml",
+    "sha256": "813b2779d5344a4d861e3d7cbbefe738cc1a22e5ea1b3fa3e8e1cf40235ba2f2"
+  },
+  "https://www.baseball-reference.com/players/w/wroblju01.shtml": {
+    "bytes": 367676,
+    "fetched_at": "2026-09-25T14:22:04Z",
+    "path": "players/wroblju01.shtml",
+    "sha256": "28af67eadbc82dbe4a272df92e874adb3083e4022970f78df8c729895e106065"
+  },
+  "https://www.baseball-reference.com/players/y/yamamyo01.shtml": {
+    "bytes": 460140,
+    "fetched_at": "2026-09-25T14:22:08Z",
+    "path": "players/yamamyo01.shtml",
+    "sha256": "71f8259dd6f6698aafd00074752b3c0119cdc19c126ba18da1c40da3f5843f94"
+  },
+  "https://www.baseball-reference.com/players/y/yateski01.shtml": {
+    "bytes": 691788,
+    "fetched_at": "2026-09-25T14:22:13Z",
+    "path": "players/yateski01.shtml",
+    "sha256": "aac53e00f89cc644b721cc6575b39579f7e1e86f966d0fb981f7c2635caa991f"
+  },
+  "https://www.baseball-reference.com/players/y/yelicch01.shtml": {
+    "bytes": 696021,
+    "fetched_at": "2026-09-25T14:22:16Z",
+    "path": "players/yelicch01.shtml",
+    "sha256": "7a748eabbba15fa269b99f844504055738a1ab53c3c07f1684d4dade1efe4766"
   },
   "https://www.baseball-reference.com/teams/ARI/2024.shtml": {
     "bytes": 733120,
