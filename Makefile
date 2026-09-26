@@ -2,7 +2,7 @@ PYTHON ?= python3
 VENV := .venv
 PY := $(VENV)/bin/python
 INSTALLED := $(VENV)/.installed
-PORT ?= 8080
+PORT = 8080
 
 .PHONY: install lint test scrape build all serve
 
@@ -38,7 +38,8 @@ all: $(INSTALLED)
 	$(PY) build.py
 
 # The site is website/ as static files, with the data.js that build.py writes there.
-# Bound to 127.0.0.1, so only this machine can open it.
-serve: $(INSTALLED)
+# Bound to 127.0.0.1, so only this machine can open it. It needs only the standard
+# library, so it never runs pip. `make serve PORT=...` picks another port.
+serve: | $(PY)
 	@echo "Open http://localhost:$(PORT)"
 	$(PY) -m http.server $(PORT) --bind 127.0.0.1 --directory website

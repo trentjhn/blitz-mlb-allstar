@@ -8,3 +8,4 @@ data/quarantine/
 data/.scrape.lock
 data/.scrape.blocked
 data/**/.*.partial
+website/.*.partial
