@@ -12,6 +12,12 @@ function fold(text) {
   return text.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
 }
 
+// Search also drops periods and apostrophes and reads a hyphen as a space, as the spec's name
+// rule does: "st louis" finds the Cardinals, "ohearn" O'Hearn, "crow armstrong" Crow-Armstrong.
+function searchable(text) {
+  return fold(text).replace(/[.'\u2019]/g, "").replace(/-/g, " ").replace(/\s+/g, " ").trim();
+}
+
 function compare(a, b) {
   return a < b ? -1 : a > b ? 1 : 0;
 }
@@ -42,13 +48,13 @@ const SORT_KEYS = {
 const STARTS_DESCENDING = new Set(["selections", "season", "show"]);
 
 function matches(row) {
-  const query = fold(state.query.trim());
+  const query = searchable(state.query);
   return (
     (state.season === "all" || row.season_id === state.season) &&
     (state.show === "all" || (row.is_show_top100 === "true") === (state.show === "in")) &&
     (!query ||
       [row.full_name, row.player_id, row.team_name, row.team_id].some((field) =>
-        fold(field).includes(query),
+        searchable(field).includes(query),
       ))
   );
 }
@@ -128,7 +134,7 @@ function chip(label, number, unit) {
   return li;
 }
 
-// A number tile, like the hung numbers on a manual scoreboard.
+// A value in a bordered tile: the All-Star years and the Show rating.
 function plate(text) {
   return Object.assign(document.createElement("span"), { className: "plate", textContent: text });
 }

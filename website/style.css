@@ -1,7 +1,5 @@
-/* A ballpark scoreboard: deep outfield-wall green, chalk-white numerals in a condensed face,
-   and one lit-bulb yellow for what is selected. Numbers set the rhythm; names stay in a
-   plain sans so they read fast. At 390 px the table scrolls inside its own box, so the page
-   never scrolls sideways. */
+/* Dark green theme with condensed numerals and yellow for the selected control. At 390 px the
+   table scrolls inside its own box, so the page never scrolls sideways. */
 :root {
   --board: oklch(0.31 0.055 155);
   --slot: oklch(0.255 0.045 155);
@@ -275,14 +273,21 @@ th[aria-sort] button {
   color: var(--bulb);
 }
 
+/* Every sortable column shows a faint mark; the sorted one lights up and says which way. */
+th[data-sort] button::after {
+  content: " \21C5";
+  font-size: 0.7em;
+  opacity: 0.45;
+}
+
 th[aria-sort="descending"] button::after {
   content: " \25BC";
-  font-size: 0.7em;
+  opacity: 1;
 }
 
 th[aria-sort="ascending"] button::after {
   content: " \25B2";
-  font-size: 0.7em;
+  opacity: 1;
 }
 
 tbody tr + tr td {
