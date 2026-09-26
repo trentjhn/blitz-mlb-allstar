@@ -20,8 +20,8 @@ NOT_STATS = {"ranker", "name_display", "age", "team_position", "pos", "awards"}
 # All-Star's row, stops the run instead of leaving a field empty. The pitching table has no
 # positions-played column.
 NEEDED = {
-    "batting": {"name_display", "age", "team_position", "pos", "awards"},
-    "pitching": {"name_display", "age", "team_position", "awards"},
+    "batting": {"name_display", "team_position", "pos", "awards"},
+    "pitching": {"name_display", "team_position", "awards"},
 }
 
 
@@ -40,7 +40,6 @@ class AllStarRow:
     player_url: str
     name: str
     stat_type: str
-    age: str
     primary_position: str
     positions_played: str
     stats: dict[str, str]
@@ -119,7 +118,6 @@ def all_star_rows(page: bytes, season: int) -> list[AllStarRow]:
                     player_url=f"{config.BR_BASE}{href.group(0)}",
                     name=" ".join(link.get_text(" ").split()),
                     stat_type=stat_type,
-                    age=text["age"],
                     primary_position=text["team_position"],
                     positions_played=text.get("pos", ""),
                     stats={label: text[stat] for stat, label in labels.items()},

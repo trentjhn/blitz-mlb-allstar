@@ -56,7 +56,7 @@ def match_show(
                 f"{', '.join(sorted(player_ids))} all read as {entry.name} on the Show list"
             )
         player = all_stars[player_ids[0]]
-        # The same name with other hands is a different player, or a stale Show entry.
+        # The same name with different bats/throws is a different player, or a stale Show entry.
         if (player.bats, player.throws) != (entry.bats, entry.throws):
             mismatches.append(
                 f"{player.player_id} ({player.full_name}): Baseball Reference has "

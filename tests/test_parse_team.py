@@ -172,9 +172,9 @@ def test_a_link_to_a_different_page_does_not_count():
 
 
 RENAMED = [
-    *[("players_standard_batting", c) for c in ["name_display", "age", "team_position", "pos"]],
+    *[("players_standard_batting", c) for c in ["name_display", "team_position", "pos"]],
     ("players_standard_batting", "awards"),
-    *[("players_standard_pitching", c) for c in ["name_display", "age", "team_position", "awards"]],
+    *[("players_standard_pitching", c) for c in ["name_display", "team_position", "awards"]],
 ]
 
 
@@ -194,10 +194,11 @@ def test_a_stat_column_renamed_in_the_header_is_an_error():
 
 
 def test_an_all_star_row_missing_a_cell_is_an_error():
-    name_cell = b'<a href="/players/j/judgeaa01.shtml">Aaron Judge</a></td>'
-    age_cell = b' <td class="right " data-stat="age" >32</td>'
-    page = edit_stat_table(name_cell + age_cell, name_cell)
-    with pytest.raises(ValueError, match="an All-Star row has no age cell"):
+    position_cell = (
+        b'<td class="left " data-stat="team_position" csk="10" ><strong>CF</strong></td>'
+    )
+    page = edit_stat_table(position_cell, b"")
+    with pytest.raises(ValueError, match="an All-Star row has no team_position cell"):
         all_star_rows(page, 2024)
 
 

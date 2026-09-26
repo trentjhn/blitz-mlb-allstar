@@ -183,7 +183,7 @@ def main() -> int:
         return 1
     gaps = roster_gaps(rows, rosters)
     report(rows, matches, rosters, gaps)
-    # A namesake with other hands would take another player's rating, so it fails the build.
+    # A namesake with different bats/throws would take another player's rating: that fails.
     problems = validate(rows, fieldnames, labels)
     problems += [f"bats/throws differ: {mismatch}" for mismatch in mismatches]
     for problem in problems:

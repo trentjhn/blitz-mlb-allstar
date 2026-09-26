@@ -140,7 +140,9 @@ class Fetcher:
         entry = self.manifest.get(url)
         if entry is not None:
             if hashlib.sha256(body).hexdigest() != entry.get("sha256"):
-                raise StopScrape(f"{path} differs from the manifest; --force re-fetches it")
+                raise StopScrape(
+                    f"{path} differs from the manifest; delete that file to fetch it again"
+                )
             return body
         # A run cut short between writing a page and its manifest entry leaves the page
         # unlisted. A complete, real page is kept, dated by its file time; anything else
