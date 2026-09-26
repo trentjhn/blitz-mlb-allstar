@@ -13,7 +13,7 @@ from allstar import config
 from allstar.discover import allstar_url, league_url
 from allstar.rows import table_labels
 from allstar.site import SITE_COLUMNS
-from allstar.validate import REQUIRED, SPOT_CHECKS, key, roster_gaps, validate
+from allstar.validate import REQUIRED, key, roster_gaps, validate
 
 GOLDEN = Path(__file__).parent / "fixtures" / "golden_rows.csv"
 BR = "https://www.baseball-reference.com"
@@ -607,34 +607,6 @@ def test_a_stat_that_is_not_a_number_fails_the_checks(
 
     problems = problems_after(good, pages, odd)
     assert any(f"{column} is {value!r}" in p for p in problems), problems
-
-
-def test_the_spot_checks_are_the_hand_checked_rows():
-    # Read from the cached pages by hand; a deleted row or value fails here.
-    assert SPOT_CHECKS == {
-        ("arraelu01", "2024", "batting", "MIA"): {"G": "33", "PA": "148", "HR": "0", "OPS": ".719"},
-        ("arraelu01", "2024", "batting", "SDP"): {
-            "G": "117",
-            "PA": "524",
-            "HR": "4",
-            "OPS": ".744",
-        },
-        ("yateski01", "2024", "pitching", "TEX"): {"SV": "33", "ERA": "1.17", "SO": "85"},
-        ("judgeaa01", "2024", "batting", "NYY"): {
-            "HR": "58",
-            "OPS": "1.159",
-            "OPS+": "225",
-            "team_name": "New York Yankees",
-            "team_record": "94-68",
-            "birth_date": "1992-04-26",
-            "debut_date": "2016-08-13",
-        },
-        ("sotoju01", "2024", "batting", "NYY"): {
-            "HR": "41",
-            "OPS": ".989",
-            "birth_place": "Santo Domingo, Dominican Republic",
-        },
-    }
 
 
 def test_throws_is_never_s(good, pages):

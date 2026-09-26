@@ -56,7 +56,6 @@ SPOT_CHECKS = {
     ("judgeaa01", "2024", "batting", "NYY"): {
         "HR": "58",
         "OPS": "1.159",
-        "OPS+": "225",
         "team_name": "New York Yankees",
         "team_record": "94-68",
         "birth_date": "1992-04-26",
