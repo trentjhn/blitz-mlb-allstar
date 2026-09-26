@@ -32,7 +32,7 @@ That's 260 rows for 177 players.
 - **Both tables:** a player marked All-Star in both the batting and the pitching table gets a row for each, because the spec's rule counts an All-Star mark in either table. Examples: Shohei Ohtani (2025-26), relievers listed at 0 PA in the batting table (Kirby Yates 2024), and position players who pitched (Willi Castro 2024).
 - **Traded:** an All-Star who played for two teams in a season gets one row per team, each with that team's stats. Rows are never summed. Examples: Luis Arraez 2024 (Miami, San Diego), Ryan O'Hearn 2025.
 
-The player counts (76 to 81) are above the 64-68 estimate. They match the full rosters on BR's All-Star game pages exactly: every player marked All-Star on a team page is on a roster, and every roster player is marked on a team page. I couldn't find where 64-68 comes from.
+The player counts (76 to 81) are above the 64-68 estimate. They match the full rosters on BR's All-Star game pages exactly: every player marked All-Star on a team page is on a roster, and every roster player is marked on a team page. The spec's 64 matches two 32-player rosters, each league's size under MLB's current rules. BR's game pages list everyone named to the game, 76, 81 and 77 players, and 59, 63 and 61 of them appeared in it. I report BR's full list.
 
 My row counts equal the Example output's (83, 89, 88), and all 260 rows pair one for one with its rows.
 
@@ -46,6 +46,7 @@ My row counts equal the Example output's (83, 89, 88), and all 260 rows pair one
 - **Stat labels kept as the page has them:** each stat column uses the page's own label and `stat_type` says which table it came from, so every value maps straight back to a cell on the page.
 - **scraped_at is the team page's fetch time:** the spec says when the row was built, but the fetch time says when the stats were captured and keeps builds byte-identical.
 - **primary_position comes from the team page:** SP, CL and RP appear only there, so it can differ by season; profile_position keeps the player page's value.
+- **Age is left out:** birth_date carries it, and a season-specific age would need a fixed reference date.
 - **Empty Pos cells filled from the player's other row:** when a team page leaves a row's Pos blank, the build takes the Pos from the player's other row on that page, else P for a pitching row, because that other row is where the page names his position.
 
 ## Validation
@@ -99,7 +100,7 @@ Values:
 
 Timing:
 
-- **2026 records:** 24 teams are one game later on my pages (+12 wins, +12 losses), so 12 games were played between the two captures. 2026 stats differ for the same reason: Aaron Judge's 2026 OPS+ is 140 on my page and 141 in the example.
+- **2026 records:** 24 teams are one game later on my pages (+12 wins, +12 losses), so 12 games were played between the two captures. 2026 stats differ for the same reason: Ozzie Albies has a .694 OPS and a 90 OPS+ on my page against .697 and 91 in the example, with the Braves at 93-66 against 93-65.
 
 Display choices:
 
