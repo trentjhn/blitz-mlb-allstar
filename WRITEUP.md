@@ -1,6 +1,6 @@
 # Writeup
 
-I built this with Claude Code. The design calls were mine: the row grain, the 4-second pacing and stop-on-403, stopping the build on a name collision instead of guessing, and reporting players and rows separately against 64-68. I reviewed each step before it went in.
+I built this with Claude Code. The design calls were mine: scraped_at as the page fetch time so builds are byte-identical, failing the build when a Show match's bats/throws disagree, checking every season against the All-Star game roster, taking primary_position from the team page, the 4-second pacing and stop-on-403, stopping the build on a name collision instead of guessing, and reporting players and rows separately against 64-68. I reviewed each step before it went in.
 
 ## Planning the scrape
 
