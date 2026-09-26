@@ -1,5 +1,7 @@
 # Writeup
 
+I built this with Claude Code. The design calls were mine: the row grain, the 4-second pacing and stop-on-403, stopping the build on a name collision instead of guessing, and reporting players and rows separately against 64-68. I reviewed each step before it went in.
+
 ## Planning the scrape
 
 Baseball Reference blocks traffic above 20 requests a minute, so I planned the scrape around that limit before writing any parser. The scraper waits 4 seconds between request starts, retries included, which caps it at 15 a minute. It retries only server errors, timeouts and dropped connections. A 403 or 429 means the site is refusing me, so the run stops there and writes a block file, and no later run sends a request until someone deletes it.
