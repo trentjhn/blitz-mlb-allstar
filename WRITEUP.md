@@ -26,7 +26,7 @@ Five pitching rows have an empty position cell. The build takes the player's pos
 
 ## The website
 
-build.py writes the rows into website/data.js, so the site is plain HTML, CSS and JavaScript with no build step and no fetch, so the page also opens straight from the file. make serve runs it on 127.0.0.1:8080. It has the example's season and Show filters, search, default sort, sortable columns and BR profile links. The look is my own, so to make sure it still behaves like the example, I listed the example tab's behaviors as 16 checks (the summary, both filters, search, the default sort and each sortable column, every cell, the links, the phone layout) and drove the page in headless Chrome to test each one against values read straight from the CSV, at desktop and phone widths.
+build.py writes the rows into website/data.js, so the site needs no build step and no fetch, and the page opens straight from the file. make serve runs it on 127.0.0.1:8080. It has the example's season and Show filters, search, default sort, sortable columns and BR profile links. The look is my own, so to make sure it still behaves like the example, I listed the example tab's behaviors as 16 checks (the summary, both filters, search, the default sort and each sortable column, every cell, the links, the phone layout) and drove the page in headless Chrome to test each one against values read straight from the CSV, at desktop and phone widths.
 
 ## Tradeoffs and next steps
 
