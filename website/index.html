@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MLB All-Stars 2024-2026</title>
+  <!-- An empty icon, so the browser does not ask the server for /favicon.ico. -->
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main>
+    <h1>MLB All-Stars, 2024 to 2026</h1>
+    <p>Every All-Star row from Baseball Reference's team pages, with the player's rating on MLB The Show 26's top 100.</p>
+
+    <ul id="summary" class="chips" aria-label="Summary"></ul>
+
+    <div class="controls">
+      <div id="season-filter" role="group" aria-label="Season">
+        <button type="button" data-season="all" aria-pressed="true">All seasons</button>
+        <button type="button" data-season="2026" aria-pressed="false">2026</button>
+        <button type="button" data-season="2025" aria-pressed="false">2025</button>
+        <button type="button" data-season="2024" aria-pressed="false">2024</button>
+      </div>
+      <div id="show-filter" role="group" aria-label="MLB The Show top 100">
+        <button type="button" data-show="all" aria-pressed="true">All players</button>
+        <button type="button" data-show="in" aria-pressed="false">Show top 100</button>
+        <button type="button" data-show="out" aria-pressed="false">Not in top 100</button>
+      </div>
+      <label>Search <input id="search" type="search" placeholder="Search player or team" autocomplete="off"></label>
+    </div>
+
+    <p id="showing" aria-live="polite"></p>
+
+    <div class="table-wrap">
+      <table id="all-stars">
+        <thead>
+          <tr>
+            <th data-sort="selections"><button type="button">All-Star yrs</button></th>
+            <th data-sort="season"><button type="button">Season</button></th>
+            <th data-sort="player"><button type="button">Player</button></th>
+            <th data-sort="type"><button type="button">Type</button></th>
+            <th data-sort="team"><button type="button">Team</button></th>
+            <th>Record</th>
+            <th data-sort="show"><button type="button">Show OVR</button></th>
+            <th>Key stats</th>
+            <th>BR</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </main>
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

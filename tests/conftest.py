@@ -23,6 +23,7 @@ def outputs_in_tmp(tmp_path, monkeypatch):
     """No test writes the real data/output/, even one whose build should have stopped."""
     monkeypatch.setattr(build, "CSV_PATH", tmp_path / "all_stars.csv")
     monkeypatch.setattr(build, "GAPS_PATH", tmp_path / "gaps.csv")
+    monkeypatch.setattr(build, "SITE_PATH", tmp_path / "data.js")
 
 
 @pytest.fixture
@@ -50,6 +51,7 @@ def built(team_pages, tmp_path_factory):
         patch.setattr(build, "team_pages", lambda manifest: team_pages)
         patch.setattr(build, "CSV_PATH", out / "all_stars.csv")
         patch.setattr(build, "GAPS_PATH", out / "gaps.csv")
+        patch.setattr(build, "SITE_PATH", out / "data.js")
         assert build.main() == 0
     return out
 

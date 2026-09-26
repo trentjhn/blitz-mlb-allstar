@@ -1,9 +1,11 @@
 """Build data/output/all_stars_2024_2026.csv from the cached pages, check it, and report.
 
+It also writes website/data.js, the same rows for the site to load.
+
 Reads data/raw/ only and sends no requests, and every page must match its manifest entry.
-The CSV and the roster-gaps appendix are written only when every check passes. Both are
-written to temp files first, so a failed write replaces neither; then each is renamed into
-place.
+The CSV, the roster-gaps appendix and the site's data file are written only when every check
+passes. All are written to temp files first, so a failed write replaces none; then each is
+renamed into place.
 
     python build.py
 """
@@ -26,6 +28,7 @@ from allstar.parse_player import read_player
 from allstar.parse_show import ShowPlayer, show_top100
 from allstar.parse_team import all_star_rows, read_team
 from allstar.rows import TeamPage, build_rows, columns, table_labels
+from allstar.site import site_data
 from allstar.validate import roster_gaps, validate
 
 log = logging.getLogger("build")
@@ -33,6 +36,7 @@ log = logging.getLogger("build")
 OUTPUT = config.ROOT / "data" / "output"
 CSV_PATH = OUTPUT / "all_stars_2024_2026.csv"
 GAPS_PATH = OUTPUT / "all_star_gaps.csv"
+SITE_PATH = config.ROOT / "website" / "data.js"
 GAP_COLUMNS = ["season_id", "player_id", "name", "gap"]
 
 
@@ -154,7 +158,7 @@ def main() -> int:
     try:
         # A build killed while writing leaves its temp files. Run one build at a time: a
         # second build started mid-write removes the first one's, and the first then stops.
-        for folder in sorted({CSV_PATH.parent, GAPS_PATH.parent}):
+        for folder in sorted({CSV_PATH.parent, GAPS_PATH.parent, SITE_PATH.parent}):
             for leftover in remove_partial_writes(folder):
                 log.warning("removed %s, left by an interrupted or running build", shown(leftover))
         manifest = load_manifest(config.RAW_DIR)
@@ -189,7 +193,11 @@ def main() -> int:
         return 1
     try:
         write_outputs(
-            {CSV_PATH: csv_text(rows, fieldnames), GAPS_PATH: csv_text(gaps, GAP_COLUMNS)}
+            {
+                CSV_PATH: csv_text(rows, fieldnames),
+                GAPS_PATH: csv_text(gaps, GAP_COLUMNS),
+                SITE_PATH: site_data(rows),
+            }
         )
     except OSError as exc:
         log.error("stopped: could not write the output: %s", exc)

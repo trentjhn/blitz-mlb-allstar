@@ -2,8 +2,9 @@ PYTHON ?= python3
 VENV := .venv
 PY := $(VENV)/bin/python
 INSTALLED := $(VENV)/.installed
+PORT ?= 8080
 
-.PHONY: install lint test scrape build all
+.PHONY: install lint test scrape build all serve
 
 install: $(INSTALLED)
 
@@ -35,3 +36,9 @@ build: $(INSTALLED)
 all: $(INSTALLED)
 	$(PY) scrape.py
 	$(PY) build.py
+
+# The site is website/ as static files, with the data.js that build.py writes there.
+# Bound to 127.0.0.1, so only this machine can open it.
+serve: $(INSTALLED)
+	@echo "Open http://localhost:$(PORT)"
+	$(PY) -m http.server $(PORT) --bind 127.0.0.1 --directory website

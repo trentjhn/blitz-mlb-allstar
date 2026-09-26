@@ -1,5 +1,6 @@
 import csv
 import hashlib
+import json
 import logging
 import os
 from dataclasses import replace
@@ -11,6 +12,7 @@ import build
 from allstar import config
 from allstar.discover import allstar_url, league_url
 from allstar.rows import table_labels
+from allstar.site import SITE_COLUMNS
 from allstar.validate import REQUIRED, SPOT_CHECKS, key, roster_gaps, validate
 
 GOLDEN = Path(__file__).parent / "fixtures" / "golden_rows.csv"
@@ -108,7 +110,7 @@ def test_the_csv_is_utf8_with_lf_line_endings(built):
 
 def test_a_second_build_is_byte_identical(built, tmp_path):
     assert build.main() == 0
-    for name in ("all_stars.csv", "gaps.csv"):
+    for name in ("all_stars.csv", "gaps.csv", "data.js"):
         assert (tmp_path / name).read_bytes() == (built / name).read_bytes()
 
 
@@ -420,6 +422,19 @@ def test_an_appendix_path_that_is_a_folder_leaves_the_new_csv_named(tmp_path, ca
     assert stop_line(caplog).endswith(f"; already replaced: {build.shown(build.CSV_PATH)}")
     assert build.CSV_PATH.is_file() and build.GAPS_PATH.is_dir()
     assert sorted(path.name for path in tmp_path.iterdir()) == ["all_stars.csv", "gaps.csv"]
+
+
+def test_a_site_data_path_that_is_a_folder_leaves_both_new_files_named(built, tmp_path, caplog):
+    # A real failure of the third rename: the CSV and the appendix are new by then.
+    build.SITE_PATH.mkdir()
+    assert build.main() == 1
+    new = f"{build.shown(build.CSV_PATH)}, {build.shown(build.GAPS_PATH)}"
+    assert stop_line(caplog).endswith(f"; already replaced: {new}")
+    for name in ("all_stars.csv", "gaps.csv"):
+        assert (tmp_path / name).read_bytes() == (built / name).read_bytes()
+    assert build.SITE_PATH.is_dir()
+    names = sorted(path.name for path in tmp_path.iterdir())
+    assert names == ["all_stars.csv", "data.js", "gaps.csv"]
 
 
 def test_the_csv_is_replaced_by_a_rename_not_rewritten_in_place(tmp_path):
@@ -754,3 +769,13 @@ def test_roster_gaps_are_found_in_both_directions(good):
         ("ghostpl01", "on the game roster, no All-Star mark on a team page"),
         ("judgeaa01", "marked on a team page, not on the game roster"),
     ]
+
+
+def test_the_site_data_holds_every_row_as_the_csv_has_it(built):
+    text = (built / "data.js").read_bytes().decode("ascii")
+    prefix = "// Written by build.py from the CSV's rows.\nwindow.ALL_STARS = "
+    assert text.startswith(prefix) and text.endswith(";\n")
+    data = json.loads(text[len(prefix) : -2])
+    rows = read(built / "all_stars.csv")
+    assert data["asOf"] == max(row["scraped_at"] for row in rows) == "2026-09-25T10:51:12Z"
+    assert data["rows"] == [{column: row[column] for column in SITE_COLUMNS} for row in rows]
