@@ -1,6 +1,6 @@
 # MLB All-Star Aggregator (2024-2026)
 
-I scrape Baseball Reference (BR) and the MLB The Show 26 top-100 list, build a CSV of the 2024-2026 All-Stars, and serve a local site over it. Every fetched page is committed under `data/raw/`, so only the install needs the network. WRITEUP.md explains my approach.
+I scrape Baseball Reference (BR) and the MLB The Show 26 top-100 list (theshowratings.com/lists/top-100-players), build a CSV of the 2024-2026 All-Stars, and serve a local site over it. Every fetched page is committed under `data/raw/`, so only the install needs the network. WRITEUP.md explains my approach.
 
 ## Reviewer quickstart
 
@@ -13,7 +13,7 @@ make build
 make serve
 ```
 
-Then open http://localhost:8080; Ctrl-C stops the server. `make install` creates `.venv` with the pinned packages (about 7 s). `make scrape` sends no requests, because every page is cached (about 7 s). `make build` writes the CSV and `website/data.js` (about 8 s). Times are from my machine. The 274 cached pages take 166 MB on disk; the clone downloads about 10 MB. To re-fetch every page, run `.venv/bin/python scrape.py --force`: 274 requests at 4 seconds each, about 18 minutes. `make test` runs the tests (about 25 s, no network) and `make lint` runs ruff.
+Then open http://localhost:8080; Ctrl-C stops the server. If 8080 is busy, run `make serve PORT=8081` and open that port. `make install` creates `.venv` with the pinned packages (about 7 s). `make scrape` sends no requests, because every page is cached (about 7 s). `make build` writes the CSV and `website/data.js` (about 8 s). Times are from my machine. The 274 cached pages take 166 MB on disk; the clone downloads about 10 MB. To re-fetch every page, run `.venv/bin/python scrape.py --force`: 274 requests at 4 seconds each, about 18 minutes. `make test` runs the tests (about 25 s, no network) and `make lint` runs ruff.
 
 ## All-Star counts per season
 
@@ -34,16 +34,18 @@ That's 260 rows for 177 players.
 
 The player counts (76 to 81) are above the 64-68 estimate. They match the full rosters on BR's All-Star game pages exactly: every player marked All-Star on a team page is on a roster, and every roster player is marked on a team page. I couldn't find where 64-68 comes from.
 
-My row counts equal the Example output's (83, 89, 88), and all 260 rows pair one for one with its rows. One pairs only through a spelling: BR lists boydma01 (2025, pitching, CHC) as "Matthew Boyd" on his team page, the All-Star game page and his own page, and the example says "Matt Boyd". He isn't on the Show top 100, so the example's spelling comes from somewhere else. I kept BR's.
+My row counts equal the Example output's (83, 89, 88), and all 260 rows pair one for one with its rows.
 
 ## Assumptions
 
 - **Rows for players in both tables:** a player marked All-Star in both the batting and the pitching table gets a row in each, because the spec counts an All-Star mark in either table.
 - **One row per team for trades:** a traded All-Star gets a row for each team with that team's stats, because team_id is part of the spec's grain and a sum would pair one team's record with another team's numbers.
-- **BR's display name over the example's:** `full_name` keeps the name as BR prints it (Matthew Boyd, where the example says Matt Boyd), because that's what the column asks for; the spec's normalized form is only for matching.
+- **BR's display name over the example's:** `full_name` keeps the name as BR prints it, because that's what the column asks for; the spec's normalized form is only for matching.
 - **All-Star game rosters as the reconciliation source:** each season is checked against BR's All-Star game page, because it lists everyone selected that year and comes from the same site as the team pages.
 - **A name collision stops the build:** if a Show name fits two All-Stars, or an All-Star's name fits two Show entries, the build stops, because a guess could give one player another's rating. None occur in this data.
 - **Stat labels kept as the page has them:** each stat column uses the page's own label and `stat_type` says which table it came from, so every value maps straight back to a cell on the page.
+- **scraped_at is the team page's fetch time:** the spec says when the row was built, but the fetch time says when the stats were captured and keeps builds byte-identical.
+- **primary_position comes from the team page:** SP, CL and RP appear only there, so it can differ by season; profile_position keeps the player page's value.
 - **Empty Pos cells filled from the player's other row:** when a team page leaves a row's Pos blank, the build takes the Pos from the player's other row on that page, else P for a pitching row, because that other row is where the page names his position.
 
 ## Validation
@@ -68,7 +70,7 @@ My row counts equal the Example output's (83, 89, 88), and all 260 rows pair one
 
 79 of the 177 All-Stars (45%) are on the Show top 100: 42 of 76 in 2024, 47 of 81 in 2025, 35 of 77 in 2026. No join could do better: 21 of the list's 100 players weren't All-Stars in 2024-2026, so at most 79 can match. The 21, with their Show rank: Blake Snell (#12), Brandon Woodruff (#40), Gerrit Cole (#48), Framber Valdez (#52), Kevin Gausman (#54), Nick Pivetta (#56), George Kirby (#62), Geraldo Perdomo (#63), Nathan Eovaldi (#67), Seiya Suzuki (#69), Sonny Gray (#70), Brice Turang (#75), Luis Castillo (#81), Spencer Schwellenbach (#83), Jackson Chourio (#84), Nico Hoerner (#87), Willy Adames (#91), Cade Horton (#94), Dansby Swanson (#97), Devin Williams (#98), Gabriel Moreno (#99). None of the 21 shares even a last name with an All-Star. The example has the same 79 matches.
 
-Names are compared after the spec's normalization, using the player page's display name. If a Show name fits two All-Stars, or an All-Star's name fits two Show entries, the build stops instead of guessing. A match whose bats/throws disagree fails the build. Neither happens here.
+Names are compared after the spec's normalization, using the player page's display name. A match whose bats/throws disagree fails the build; none do.
 
 ## The site
 
@@ -77,29 +79,38 @@ Names are compared after the spec's normalization, using the player page's displ
 ## Data notes
 
 - An empty cell means null. Booleans are lowercase `true`/`false`. The site shows "-" where a value is missing.
-- `scraped_at` is the fetch time of the row's team page, not the build time, so builds are byte-identical. The site's "as of" time is the latest of those, in UTC.
+- The site's "as of" time is the latest team-page fetch time (`scraped_at`), in UTC.
 - On pitching rows, the stat labels both tables share (G, R, H, HR, BB, SO, WAR, HBP, IBB) hold pitching values: HR there is home runs allowed.
 - OAK (2024) and ATH (2025-26) are one franchise under BR's per-season codes.
-- `primary_position` is the team page's Pos for that row, because SP, CL and RP exist only there, so Aaron Judge is CF in 2024 and RF in 2026. `profile_position` keeps the player page's position.
 - `full_name` comes from the player page, so the team tables' name marks (`*`, `#`, "(10-day IL)") never reach the CSV.
 - Five rows have an empty Pos cell on the team page (Willi Castro 2024, Tanner Scott 2024 SDP, Zach McKinstry 2025, Foster Griffin 2026, Justin Verlander 2026). The Assumptions section above has the rule the build uses.
 - Tests and counts are pinned to the committed cache. I fetched the 2026 pages on 2026-09-25, before the season ended, so a `--force` re-scrape can change 2026 values.
 
-## Differences from the Example output tab
+## Where the Example tab and BR disagree
 
-Where values differ, the CSV follows the cached page:
+Where the example and the cached pages differ, the CSV follows the pages.
+
+Values:
+
+- **OPS and OPS+ at 0 PA** (14 rows), which the page leaves blank: the example shows a dash on 9, 0.000 and -100 on 3, and real-looking rates on 2 (Ryan Helsley 2024, Josh Hader 2025).
+- **WHIP:** Zach McKinstry's 2025 page shows 0 hits and 0 walks in one out, so 0.000; the example shows 1.50. Kyle Finnegan's 2024 page has 1.335, which is (61 H + 24 BB) / 63⅔ IP (BR shows 63.2); the example has 1.32.
+- **Bats/throws:** the example shows B/R for Ozzie Albies 2026, where its other switch hitters show S (his page says Both, which the spec codes S), and nothing for Jurickson Profar 2024.
+- **2025 OPS+:** 1 to 4 points off on 36 rows. OPS matches on all 36, so the difference is in the league and park figures OPS+ is scaled by.
+
+Timing:
 
 - **2026 records:** 24 teams are one game later on my pages (+12 wins, +12 losses), so 12 games were played between the two captures. 2026 stats differ for the same reason: Aaron Judge's 2026 OPS+ is 140 on my page and 141 in the example.
-- **2025 OPS+:** 1 to 4 points off on 36 rows. OPS matches on all 36, so the difference is in the league and park figures OPS+ is scaled by.
+
+Display choices:
+
 - **Pitching positions:** the example shows P or a dash on 67 rows where the Pos cell says SP, CL or RP.
 - **Empty Pos cells:** the example shows P or a dash on all five, matching mine only on Tanner Scott's 2024 San Diego row.
-- **OPS and OPS+ at 0 PA** (14 rows), which the page leaves blank: the example shows a dash on 9, 0.000 and -100 on 3, and real-looking rates on 2 (Ryan Helsley 2024, Josh Hader 2025).
-- **Bats/throws:** the example shows B/R for Ozzie Albies 2026, where its other switch hitters show S (his page says Both, which the spec codes S), and nothing for Jurickson Profar 2024.
 - **Names:** on 40 rows (26 players) the example shows the matching form (Jose Ramirez, Bobby Witt). The CSV keeps BR's display name, as `full_name` asks.
+- **Matthew Boyd:** BR lists boydma01 (2025, pitching, CHC) as "Matthew Boyd" on his team page, the All-Star game page and his own page; the example says "Matt Boyd". He isn't on the Show top 100, so the example's spelling comes from somewhere else. I kept BR's, and the rows still pair one for one.
 - **St. Louis:** the example writes St Louis (7 rows).
-- **WHIP:** Zach McKinstry's 2025 page shows 0 hits and 0 walks in one out, so 0.000; the example shows 1.50. Kyle Finnegan's 2024 page has 1.335, which is (61 H + 24 BB) / 63⅔ IP (BR shows 63.2); the example has 1.32.
 - **Number format:** the site shows BR's own format ("OPS .977", "WHIP 0.984"), where the example shows "OPS 0.977" and "WHIP 0.98".
-- **Codes and links:** the example shows TBD and ATH3 for BR's TBR and OAK, and links a BR search, not the profile.
+- **Codes:** the example shows TBD and ATH3 for BR's TBR and OAK.
+- **Links:** the example links a BR search, not the player's profile.
 
 ## How the scrape stays polite
 

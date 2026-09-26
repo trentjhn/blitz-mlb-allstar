@@ -18,7 +18,7 @@ The Show join uses the spec's normalization. If a Show name fits two All-Stars, 
 
 ## Validation
 
-build.py writes nothing unless every check passes: a unique key, no empty IDs, an All-Star on all 30 teams each season, allowed values, and selections equal to distinct seasons. Spot checks compare Arraez's two splits, Kirby Yates, Juan Soto and Aaron Judge (all 2024) against values I read off the pages. Each season is also reconciled with its All-Star game roster, and the counts match exactly both ways: 76, 81 and 77 players. That's above the spec's "roughly 64-68". I couldn't find where the estimate comes from, so the README reports players and rows separately. The rows (83, 89, 88) equal the example's.
+build.py writes nothing unless every check passes: a unique key, no empty IDs, an All-Star on all 30 teams each season, allowed values, and selections equal to distinct seasons. Spot checks compare Arraez's two splits, Kirby Yates, Juan Soto and Aaron Judge (all 2024) against values I read off the pages. Each season is also reconciled with its All-Star game roster, and the counts match exactly both ways: 76, 81 and 77 players. That's above the spec's "roughly 64-68", so the README reports players and rows separately. The rows (83, 89, 88) equal the example's.
 
 ## Bugs I hit
 
@@ -26,7 +26,7 @@ Five pitching rows have an empty position cell. The build takes the player's pos
 
 ## The website
 
-build.py writes the rows into website/data.js, so the site needs no build step and no fetch, and the page opens straight from the file. make serve runs it on 127.0.0.1:8080. It has the example's season and Show filters, search, default sort, sortable columns and BR profile links. The look is my own, so to make sure it still behaves like the example, I listed the example tab's behaviors as 16 checks (the summary, both filters, search, the default sort and each sortable column, every cell, the links, the phone layout) and drove the page in headless Chrome to test each one against values read straight from the CSV, at desktop and phone widths.
+build.py writes the rows into website/data.js, so the site needs no build step and no fetch, and the page opens straight from the file. make serve runs it on 127.0.0.1:8080. It has the example's season and Show filters, search, default sort, sortable columns and BR profile links. The look is my own, so to make sure it still behaves like the example, I listed the example tab's behaviors as 16 checks (the summary, both filters, search, the default sort and each sortable column, every cell, the links, the phone layout) and checked each one in a browser against values read straight from the CSV, at desktop and phone widths. The pytest suite covers the pipeline, not the page.
 
 ## Tradeoffs and next steps
 
