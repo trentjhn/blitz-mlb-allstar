@@ -71,16 +71,16 @@ function ordered(list) {
   });
 }
 
-function lines(first, second) {
-  const cell = document.createElement("td");
-  cell.append(first);
+function cell(first, second) {
+  const td = document.createElement("td");
+  td.append(first);
   if (second !== undefined) {
     const sub = document.createElement("span");
     sub.className = "sub";
     sub.textContent = second;
-    cell.append(sub);
+    td.append(sub);
   }
-  return cell;
+  return td;
 }
 
 function keyStats(row) {
@@ -96,7 +96,8 @@ function tableRow(row) {
   tr.dataset.key = [row.player_id, row.season_id, row.stat_type, row.team_id].join("|");
   const name = document.createElement("strong");
   name.textContent = row.full_name;
-  // Batting rows show the positions played; pitching tables have none, so the Pos cell.
+  // Batting rows show the positions played; pitching tables have none, so pitching rows
+  // show the Pos cell.
   const position = row.positions_played || row.primary_position;
   const link = document.createElement("a");
   link.href = row.source_player_url;
@@ -106,22 +107,22 @@ function tableRow(row) {
   link.setAttribute("aria-label", `Baseball Reference page for ${row.full_name}`);
   const matched = row.is_show_top100 === "true";
   tr.append(
-    lines(plate(row.all_star_selections_2024_2026)),
-    lines(row.season_id),
-    lines(name, `${position} · ${row.bats}/${row.throws}`),
-    lines(row.stat_type === "batting" ? "Batting" : "Pitching"),
-    lines(row.team_name, row.team_id),
-    lines(row.team_record),
+    cell(plate(row.all_star_selections_2024_2026)),
+    cell(row.season_id),
+    cell(name, `${position} · ${row.bats}/${row.throws}`),
+    cell(row.stat_type === "batting" ? "Batting" : "Pitching"),
+    cell(row.team_name, row.team_id),
+    cell(row.team_record),
     matched
-      ? lines(plate(row.show_overall_rating), `#${row.show_rank} · POT ${row.show_potential_grade}`)
-      : lines(EMPTY),
-    lines(keyStats(row)),
-    lines(link),
+      ? cell(plate(row.show_overall_rating), `#${row.show_rank} · POT ${row.show_potential_grade}`)
+      : cell(EMPTY),
+    cell(keyStats(row)),
+    cell(link),
   );
   return tr;
 }
 
-// A summary plate: an optional label, a big number, and a unit. The text reads as one line,
+// A summary chip: an optional label, a big number, and a unit. The text reads as one line,
 // "2024: 83 rows"; the style sets the number apart.
 function chip(label, number, unit) {
   const li = document.createElement("li");
@@ -161,7 +162,7 @@ function render() {
   if (shown.length) {
     body.replaceChildren(...shown.map(tableRow));
   } else {
-    const empty = lines("No rows match.");
+    const empty = cell("No rows match.");
     empty.colSpan = 9;
     const tr = document.createElement("tr");
     tr.append(empty);
